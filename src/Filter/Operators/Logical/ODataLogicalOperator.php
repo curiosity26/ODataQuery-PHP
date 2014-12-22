@@ -10,6 +10,7 @@ namespace ODataQuery\Filter\Operators\Logical;
 
 
 use ODataQuery\Filter\ODataQueryFilter;
+use ODataQuery\Filter\Operators\Logical\Mathematical\ODataMathematicalOperatorInterface;
 
 class ODataLogicalOperator extends ODataQueryFilter implements ODataConditionalInterface {
     protected $value;
@@ -31,6 +32,9 @@ class ODataLogicalOperator extends ODataQueryFilter implements ODataConditionalI
         $property = $this->property;
         $op = $this->operator;
         $value = $this->value;
+        if ($value instanceof ODataMathematicalOperatorInterface) {
+            $value = "($value)";
+        }
         return "$property $op $value";
     }
 }

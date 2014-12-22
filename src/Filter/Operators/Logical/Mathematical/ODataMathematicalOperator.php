@@ -17,10 +17,30 @@ use ODataQuery\Filter\Operators\Logical\ODataLogicalOperator;
 use ODataQuery\Filter\Operators\Logical\ODataNotEqualsOperator;
 use ODataQuery\Filter\Operators\ODataComparableInterface;
 
-class ODataMathematicalOperator extends ODataLogicalOperator implements ODataComparableInterface {
+class ODataMathematicalOperator extends ODataLogicalOperator implements ODataMathematicalOperatorInterface, ODataComparableInterface {
     public function __construct($property = NULL, $value = NULL, $operator = NULL) {
         parent::__construct($property, $value);
         $this->operator = $operator;
+    }
+
+    public function add($value) {
+        return new ODataAddOperator($this, $value);
+    }
+
+    public function subtract($value) {
+        return new ODataSubtractOperator($this, $value);
+    }
+
+    public function multiply($value) {
+        return new ODataMultiplyOperator($this, $value);
+    }
+
+    public function divide($value) {
+        return new ODataDivideOperator($this, $value);
+    }
+
+    public function modulo($value) {
+        return new ODataModuloOperator($this, $value);
     }
 
     public function equals($value) {
@@ -52,10 +72,10 @@ class ODataMathematicalOperator extends ODataLogicalOperator implements ODataCom
         $value = $this->value;
         $op = $this->operator;
 
-        if ($property instanceof ODataMathematicalOperator) {
+        if ($property instanceof ODataMathematicalOperatorInterface) {
             $property = "($property)";
         }
-        if ($value instanceof ODataMathematicalOperator) {
+        if ($value instanceof ODataMathematicalOperatorInterface) {
             $value = "($value)";
         }
 
