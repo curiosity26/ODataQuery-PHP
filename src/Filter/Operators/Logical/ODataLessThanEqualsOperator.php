@@ -14,6 +14,6 @@ use ODataQuery\ODataQueryOptionInterface;
 class ODataLessThanEqualsOperator extends ODataLogicalOperator {
     public function __construct($property = NULL, $value = NULL) {
         parent::__construct($property, $value);
-        $this->operator('le');
+        $this->operator = 'le';
     }
 }

@@ -12,24 +12,16 @@ namespace ODataQuery\Filter\Operators\Functional\Mathematical;
 use ODataQuery\Filter\Operators\Functional\ODataFunctionalOperator;
 
 class ODataIsOfOperator extends ODataFunctionalOperator {
+    protected $assignable = FALSE;
     public function __construct($type, $assignable = FALSE) {
-        parent::__construct('isof', $type, array($assignable));
-    }
-
-    public function assignable($assignable = NULL) {
-        if (isset($assignable)) {
-            $assignable = $assignable === TRUE;
-            $this->arguments(array($assignable));
-            return $this;
-        }
-        $args = $this->arguments();
-        return $args[0] === TRUE;
+        parent::__construct('isof', $type);
+        $this->assignable= $assignable;
     }
 
     public function __toString() {
-        $function = $this->operator();
-        $type = $this->property();
-        if ($this->assignable()) {
+        $function = $this->operator;
+        $type = $this->property;
+        if ($this->assignable) {
             return "$function(\$it, $type)";
         }
         return "$function($type)";

@@ -10,6 +10,7 @@ namespace ODataQuery\Filter;
 
 
 interface ODataQueryFilterInterface {
-    public function property($property = NULL);
+    public function __get($name);
+    public function __set($name, $value);
     public function __toString();
 }

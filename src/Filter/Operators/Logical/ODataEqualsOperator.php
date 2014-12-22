@@ -12,6 +12,6 @@ namespace ODataQuery\Filter\Operators\Logical;
 class ODataEqualsOperator extends ODataLogicalOperator {
     public function __construct($property = NULL, $value = NULL) {
         parent::__construct($property, $value);
-        $this->operator('eq');
+        $this->operator = 'eq';
     }
 }

@@ -11,7 +11,6 @@ namespace ODataQuery\Filter\Operators\Functional\Mathematical;
 
 class ODataCastOperator extends ODataIsOfOperator {
     public function __construct($type = NULL, $assignable = FALSE) {
-        parent::__construct('cast');
-        $this->assignable($assignable);
+        parent::__construct('cast', $assignable);
     }
 }

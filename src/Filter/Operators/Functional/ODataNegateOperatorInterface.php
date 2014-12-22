@@ -9,6 +9,5 @@
 namespace ODataQuery\Filter\Operators\Functional;
 
 interface ODataNegateOperatorInterface {
-    public function value($value = NULL);
     public function __toString();
 }

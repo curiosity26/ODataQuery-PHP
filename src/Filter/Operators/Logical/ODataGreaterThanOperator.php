@@ -12,6 +12,6 @@ namespace ODataQuery\Filter\Operators\Logical;
 class ODataGreaterThanOperator extends ODataLogicalOperator {
     public function __construct($property = NULL, $value = NULL) {
         parent::__construct($property, $value);
-        $this->operator('gt');
+        $this->operator = 'gt';
     }
 }

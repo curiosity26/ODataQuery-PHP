@@ -8,41 +8,15 @@
 
 namespace ODataQuery\Filter\Operators\Functional;
 
-use ODataQuery\Filter\ODataQueryFilterInterface;
+use ODataQuery\Filter\ODataQueryFilter;
 
-class ODataFunctionalOperator implements ODataFunctionalOperatorInterface, ODataNegatableOperatorInterface, ODataQueryFilterInterface {
-    private $property;
-    private $operator;
-    private $arguments = array();
+class ODataFunctionalOperator extends ODataQueryFilter implements ODataNegatableOperatorInterface {
+    protected $arguments = array();
 
     public function __construct($operator = NULL, $property = NULL, array $arguments = array()) {
-        $this->operator($operator);
-        $this->property($property);
-        $this->arguments($arguments);
-    }
-
-    public function property($prop = NULL) {
-        if (isset($prop)) {
-            $this->property = $prop;
-            return $this;
-        }
-        return $this->property;
-    }
-
-    protected function operator($op = NULL) {
-        if (isset($op)) {
-            $this->operator = $op;
-            return $this;
-        }
-        return $this->operator;
-    }
-
-    protected function arguments(array $args = array()) {
-        if (isset($args)) {
-            $this->arguments = $args;
-            return $this;
-        }
-        return $this->arguments;
+        $this->operator = $operator;
+        $this->property = $property;
+        $this->arguments = $arguments;
     }
 
     public function not() {
@@ -50,9 +24,9 @@ class ODataFunctionalOperator implements ODataFunctionalOperatorInterface, OData
     }
 
     public function __toString() {
-        $function = $this->operator();
-        $property = $this->property();
-        $args = implode(',', $this->arguments());
+        $function = $this->operator;
+        $property = $this->property;
+        $args = implode(',', $this->arguments);
         if (strlen($args) > 0) {
             $args = ", $args";
         }

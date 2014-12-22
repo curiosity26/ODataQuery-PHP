@@ -11,6 +11,6 @@ namespace ODataQuery\Filter\Operators\Logical;
 class ODataHasOperator extends ODataLogicalOperator {
     public function __construct($property = NULL, $value = NULL) {
         parent::__construct($property, $value);
-        $this->operator('has');
+        $this->operator = 'has';
     }
 }

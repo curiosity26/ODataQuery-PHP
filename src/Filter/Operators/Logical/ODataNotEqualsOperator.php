@@ -19,6 +19,6 @@ class ODataNotEqualsOperator extends ODataLogicalOperator {
 
     public function __construct($property = NULL, $value = NULL) {
         parent::__construct($property, $value);
-        $this->operator('ne');
+        $this->operator = 'ne';
     }
 }

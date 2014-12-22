@@ -18,10 +18,10 @@ class ODataSubstringOperator extends ODataComparableStringFunctionOperator {
     public function range($start = NULL, $finish = NULL) {
         if (isset($start)) {
             $args = array($start, $finish);
-            $this->arguments(array_filter($args));
+            $this->arguments = array_filter($args);
             return $this;
         }
-        $args = $this->arguments();
+        $args = $this->arguments;
         $range = array(
             'start' => $args[0],
             'finish' => isset($args[1]) ? $args[1] : NULL

@@ -18,7 +18,7 @@ class ODataGeoDistanceOperator extends ODataFunctionalOperator {
     }
 
     public function points($point1 = NULL, $point2 = NULL) {
-        $args = $this->arguments();
+        $args = $this->arguments;
         if (isset($point1) || isset($point2)) {
             if (isset($point1)) {
                 $args[0] = $point1;
@@ -26,7 +26,6 @@ class ODataGeoDistanceOperator extends ODataFunctionalOperator {
             if (isset($point2)) {
                 $args[1] = $point2;
             }
-            return $this;
         }
         return $args;
     }

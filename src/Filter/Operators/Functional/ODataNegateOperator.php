@@ -9,22 +9,16 @@
 namespace ODataQuery\Filter\Operators\Functional;
 
 
-class ODataNegateOperator implements ODataNegateOperatorInterface {
+use ODataQuery\Filter\ODataQueryFilter;
+
+class ODataNegateOperator extends ODataQueryFilter implements ODataNegateOperatorInterface {
     private $value;
 
     public function __construct($value = NULL) {
-        $this->value($value);
-    }
-
-    public function value($value = NULL) {
-        if (isset($value)) {
-            $this->value = $value;
-            return $this;
-        }
-        return $this->value;
+        $this->value = $value;
     }
 
     public function __toString() {
-        return "not {$this->value()}";
+        return "not {$this->value}";
     }
 }

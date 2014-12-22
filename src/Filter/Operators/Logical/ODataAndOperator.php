@@ -13,7 +13,7 @@ class ODataAndOperator extends ODataLogicalOperator {
 
     public function __construct($property = NULL, $value = NULL) {
         parent::__construct($property, $value);
-        $this->operator('and');
+        $this->operator = 'and';
     }
 
     public function _and($value) {
@@ -25,9 +25,9 @@ class ODataAndOperator extends ODataLogicalOperator {
     }
 
     public function __toString() {
-        $property = $this->property();
-        $value = $this->value();
-        $op = $this->operator();
+        $property = $this->property;
+        $value = $this->value;
+        $op = $this->operator;
         if ($property instanceof ODataConditionalInterface) {
             $property = "($property)";
         }
