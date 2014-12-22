@@ -9,14 +9,16 @@
 namespace ODataQuery\Filter\Operators\Functional\String;
 
 
-class ODataLengthOperator extends ODataComparableStringFunctionOperator {
+use ODataQuery\Filter\Operators\Functional\ODataComparableFunctionOperator;
+
+class ODataLengthOperator extends ODataComparableFunctionOperator {
     public function __construct($property = NULL) {
         parent::__construct('length', $property);
     }
 
     public function __toString() {
-        $function = $this->operator();
-        $property = $this->property();
+        $function = $this->operator;
+        $property = $this->property;
         return "$function($property)";
     }
 

@@ -9,8 +9,8 @@
 namespace ODataQuery\Filter\Operators\Functional\String;
 
 
-class ODataConcatOperator extends ODataComparableStringFunctionOperator {
-    public function __construct($property = NULL) {
-        parent::__construct('concat', $property);
+class ODataConcatOperator extends ODataStringComparisonFunctionOperator {
+    public function __construct($property = NULL, $value = NULL) {
+        parent::__construct('concat', $property, $value);
     }
 }

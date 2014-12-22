@@ -20,16 +20,16 @@ class ODataIndexOfOperator extends ODataComparableFunctionOperator {
     public function value($value = NULL) {
         if (isset($value)) {
             $value = preg_replace('/\'{1}/', "''", $value);
-            $this->arguments(array($value));
+            $this->arguments = array($value);
             return $this;
         }
-        $args = $this->arguments();
+        $args = $this->arguments;
         return $args[0];
     }
 
     public function __toString() {
-        $function = $this->operator();
-        $property = $this->property();
+        $function = $this->operator;
+        $property = $this->property;
         $value = $this->value();
         return "$function($property, '$value')";
     }
