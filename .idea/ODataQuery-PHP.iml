@@ -1,8 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Test" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="PHP">
+        <CLASSES>
+          <root url="file:///usr/local/bin" />
+        </CLASSES>
+        <SOURCES>
+          <root url="file:///usr/local/bin" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="PHARS">
+        <CLASSES>
+          <root url="phar:///usr/local/bin/phpunit.phar" />
+        </CLASSES>
+        <SOURCES>
+          <root url="phar:///usr/local/bin/phpunit.phar" />
+        </SOURCES>
+      </library>
+    </orderEntry>
   </component>
 </module>

@@ -10,7 +10,7 @@ namespace ODataQuery\Search;
 
 
 interface ODataQuerySearchInterface {
-    public function _and(ODataQuerySearchInterface $conditional);
-    public function _or(ODataQuerySearchInterface $conditional);
+    public function _and($conditional);
+    public function _or($conditional);
     public function __toString();
 }

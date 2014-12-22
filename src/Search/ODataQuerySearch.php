@@ -13,6 +13,7 @@ use ODataQuery\ODataQueryOptionInterface;
 
 class ODataQuerySearch implements ODataQueryOptionInterface, ODataQuerySearchInterface {
     private $query;
+    private $conditionals = array();
 
     public function __construct($query = NULL) {
         $this->query($query);
@@ -20,29 +21,42 @@ class ODataQuerySearch implements ODataQueryOptionInterface, ODataQuerySearchInt
 
     public function query($query = NULL) {
         if (isset($query)) {
-            $query = trim($query);
-            if (preg_match('/\s+/', $query) !== FALSE) {
-                $query = "\"$query\"";
-            }
-            $this->query = $query;
+            $this->query = self::cleanQuery($query);
             return $this;
         }
         return $this->query;
     }
 
-    public function _and(ODataQuerySearchInterface $conditional) {
-        return new ODataQuerySearchAndConditional($this, $conditional);
+    static protected function cleanQuery($query) {
+        if (!is_string($query)) {
+            return $query;
+        }
+        $query = trim($query);
+        if (preg_match('/\s+/', $query) !== FALSE) {
+            $query = "\"$query\"";
+        }
+        return $query;
     }
 
-    public function _or(ODataQuerySearchInterface $conditional) {
-        return new ODataQuerySearchOrConditional($this, $conditional);
+    public function _and($conditional) {
+        $conditional = self::cleanQuery($conditional);
+        $this->conditionals[] = array('AND', $conditional);
+        return $this;
     }
 
-    public function build() {
+    public function _or($conditional) {
+        $conditional = self::cleanQuery($conditional);
+        $this->conditionals[] = array('OR', $conditional);
         return $this;
     }
 
     public function __toString() {
-        return $this->query;
+        $query = $this->query();
+        foreach ($this->conditionals as $conditional) {
+            $op = $conditional[0];
+            $condition = is_string($conditional[1]) ? $conditional[1] : "({$conditional[1]})";
+            $query .= " $op $condition";
+        }
+        return $query;
     }
 }
