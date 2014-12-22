@@ -26,7 +26,7 @@ class ODataFunctionalOperator extends ODataQueryFilter implements ODataNegatable
     public function __toString() {
         $function = $this->operator;
         $property = $this->property;
-        $args = implode(',', $this->arguments);
+        $args = implode(', ', $this->arguments);
         if (strlen($args) > 0) {
             $args = ", $args";
         }

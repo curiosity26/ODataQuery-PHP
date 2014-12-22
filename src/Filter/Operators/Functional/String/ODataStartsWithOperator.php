@@ -11,6 +11,6 @@ namespace ODataQuery\Filter\Operators\Functional\String;
 
 class ODataStartsWithOperator extends ODataStringComparisonFunctionOperator {
     public function __construct($property = NULL, $value = NULL) {
-        parent::__construct('startsswith', $property, $value);
+        parent::__construct('startswith', $property, $value);
     }
 }

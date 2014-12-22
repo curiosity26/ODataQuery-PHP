@@ -9,6 +9,8 @@
 namespace ODataQuery\Filter\Operators\Logical;
 
 
+use ODataQuery\Filter\Operators\Functional\ODataFunctionalOperator;
+
 class ODataAndOperator extends ODataLogicalOperator {
 
     public function __construct($property = NULL, $value = NULL) {
@@ -28,10 +30,12 @@ class ODataAndOperator extends ODataLogicalOperator {
         $property = $this->property;
         $value = $this->value;
         $op = $this->operator;
-        if ($property instanceof ODataConditionalInterface) {
+        if ($property instanceof ODataConditionalInterface &&
+            !($property instanceof ODataFunctionalOperator)) {
             $property = "($property)";
         }
-        if ($value instanceof ODataConditionalInterface) {
+        if ($value instanceof ODataConditionalInterface &&
+            !($property instanceof ODataFunctionalOperator)) {
             $value = "($value)";
         }
 

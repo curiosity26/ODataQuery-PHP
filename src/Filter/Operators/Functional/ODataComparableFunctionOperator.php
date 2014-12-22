@@ -9,6 +9,12 @@
 namespace ODataQuery\Filter\Operators\Functional;
 
 
+use ODataQuery\Filter\Operators\Logical\Mathematical\ODataAddOperator;
+use ODataQuery\Filter\Operators\Logical\Mathematical\ODataDivideOperator;
+use ODataQuery\Filter\Operators\Logical\Mathematical\ODataMathematicalOperatorInterface;
+use ODataQuery\Filter\Operators\Logical\Mathematical\ODataModuloOperator;
+use ODataQuery\Filter\Operators\Logical\Mathematical\ODataMultiplyOperator;
+use ODataQuery\Filter\Operators\Logical\Mathematical\ODataSubtractOperator;
 use ODataQuery\Filter\Operators\Logical\ODataEqualsOperator;
 use ODataQuery\Filter\Operators\Logical\ODataGreaterThanEqualsOperator;
 use ODataQuery\Filter\Operators\Logical\ODataGreaterThanOperator;
@@ -17,14 +23,18 @@ use ODataQuery\Filter\Operators\Logical\ODataLessThanOperator;
 use ODataQuery\Filter\Operators\Logical\ODataNotEqualsOperator;
 use ODataQuery\Filter\Operators\ODataComparableInterface;
 
-class ODataComparableFunctionOperator extends ODataFunctionalOperator implements ODataComparableInterface {
+class ODataComparableFunctionOperator extends ODataFunctionalOperator implements ODataComparableInterface, ODataMathematicalOperatorInterface {
     public function equals($value, $isField = FALSE) {
-        $value = $isField === TRUE || is_numeric($value) ? $value : "'$value'";
+        if ($isField !== TRUE && is_string($value)) {
+            $value = "'$value'";
+        }
         return new ODataEqualsOperator($this, $value);
     }
 
     public function notEquals($value, $isField = FALSE) {
-        $value = $isField === TRUE || is_numeric($value) ? $value : "'$value'";
+        if ($isField !== TRUE && is_string($value)) {
+            $value = "'$value'";
+        }
         return new ODataNotEqualsOperator($this, $value);
     }
 
@@ -42,5 +52,25 @@ class ODataComparableFunctionOperator extends ODataFunctionalOperator implements
 
     public function greaterThanEquals($value) {
         return new ODataGreaterThanEqualsOperator($this, $value);
+    }
+
+    function add($value) {
+        return new ODataAddOperator($this, $value);
+    }
+
+    function subtract($value) {
+        return new ODataSubtractOperator($this, $value);
+    }
+
+    function multiply($value) {
+        return new ODataMultiplyOperator($this, $value);
+    }
+
+    function divide($value) {
+        return new ODataDivideOperator($this, $value);
+    }
+
+    function modulo($value) {
+        return new ODataModuloOperator($this, $value);
     }
 }

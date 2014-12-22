@@ -9,14 +9,12 @@
 namespace ODataQuery\Filter\Operators\Functional\String;
 
 
-use ODataQuery\Filter\Operators\Functional\ODataFunctionalOperator;
-
-class ODataStringComparisonFunctionOperator extends ODataFunctionalOperator {
+class ODataStringComparisonFunctionOperator extends ODataStringOperator {
 
     public function __construct($operator = NULL, $property = NULL, $value = NULL) {
         $this->operator = $operator;
         $this->property = $property;
-        $this->value = $value;
+        $this->value($value);
     }
 
     public function value($value = NULL) {

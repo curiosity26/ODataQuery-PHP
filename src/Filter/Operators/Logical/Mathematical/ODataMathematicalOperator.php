@@ -8,6 +8,7 @@
 
 namespace ODataQuery\Filter\Operators\Logical\Mathematical;
 
+use ODataQuery\Filter\Operators\Functional\ODataFunctionalOperator;
 use ODataQuery\Filter\Operators\Logical\ODataEqualsOperator;
 use ODataQuery\Filter\Operators\Logical\ODataGreaterThanEqualsOperator;
 use ODataQuery\Filter\Operators\Logical\ODataGreaterThanOperator;
@@ -72,10 +73,12 @@ class ODataMathematicalOperator extends ODataLogicalOperator implements ODataMat
         $value = $this->value;
         $op = $this->operator;
 
-        if ($property instanceof ODataMathematicalOperatorInterface) {
+        if ($property instanceof ODataMathematicalOperatorInterface &&
+          !($property instanceof ODataFunctionalOperator)) {
             $property = "($property)";
         }
-        if ($value instanceof ODataMathematicalOperatorInterface) {
+        if ($value instanceof ODataMathematicalOperatorInterface &&
+          !($property instanceof ODataFunctionalOperator)) {
             $value = "($value)";
         }
 

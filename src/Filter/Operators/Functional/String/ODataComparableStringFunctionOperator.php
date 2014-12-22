@@ -9,18 +9,17 @@
 namespace ODataQuery\Filter\Operators\Functional\String;
 
 
-use ODataQuery\Filter\Operators\Functional\ODataFunctionalOperator;
 use ODataQuery\Filter\Operators\Logical\ODataEqualsOperator;
 use ODataQuery\Filter\Operators\Logical\ODataNotEqualsOperator;
 
-class ODataComparableStringFunctionOperator extends ODataFunctionalOperator {
+class ODataComparableStringFunctionOperator extends ODataStringOperator {
     public function equals($value, $isField = FALSE) {
-        $value = $isField !== TRUE ? "'$value'" : $value;
+        $value = $isField === TRUE ? $value : "'$value'";
         return new ODataEqualsOperator($this, $value);
     }
 
     public function notEquals($value, $isField = FALSE) {
-        $value = $isField !== TRUE ? "'$value'" : $value;
+        $value = $isField === TRUE ? $value : "'$value'";
         return new ODataNotEqualsOperator($this, $value);
     }
 }

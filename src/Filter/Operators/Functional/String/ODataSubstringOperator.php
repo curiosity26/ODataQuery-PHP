@@ -10,22 +10,27 @@ namespace ODataQuery\Filter\Operators\Functional\String;
 
 
 class ODataSubstringOperator extends ODataComparableStringFunctionOperator {
-    public function __construct($property = NULL, $start = NULL, $finish = NULL) {
+    protected $start;
+    protected $end;
+    public function __construct($property = NULL, $start = NULL, $end = NULL) {
         parent::__construct('substring', $property);
-        $this->range($start, $finish);
+        $this->range($start, $end);
     }
 
-    public function range($start = NULL, $finish = NULL) {
-        if (isset($start)) {
-            $args = array($start, $finish);
-            $this->arguments = array_filter($args);
-            return $this;
+    public function range($start = NULL, $end = NULL) {
+        $this->start = $start;
+        $this->end = $end;
+    }
+
+    public function __toString() {
+        $function = $this->operator;
+        $property = $this->property;
+        $start = $this->start;
+        $end = $this->end;
+        $arg = $start;
+        if (isset($end)) {
+            $arg .= ", $end";
         }
-        $args = $this->arguments;
-        $range = array(
-            'start' => $args[0],
-            'finish' => isset($args[1]) ? $args[1] : NULL
-        );
-        return $range;
+        return "$function($property, $arg)";
     }
 }
