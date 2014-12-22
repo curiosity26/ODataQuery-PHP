@@ -10,6 +10,6 @@ namespace ODataQuery\Filter\Operators\Logical;
 
 
 interface ODataConditionalInterface {
-    public function _and(ODataLogicalOperatorInterface $value);
-    public function _or(ODataLogicalOperatorInterface $value);
+    public function _and($value);
+    public function _or($value);
 }

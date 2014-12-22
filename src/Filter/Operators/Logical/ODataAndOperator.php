@@ -9,46 +9,25 @@
 namespace ODataQuery\Filter\Operators\Logical;
 
 
-class ODataAndOperator implements ODataLogicalOperatorInterface, ODataConditionalInterface {
-    private $property;
-    private $value;
+class ODataAndOperator extends ODataLogicalOperator {
 
-    public function __construct(ODataLogicalOperatorInterface $property = NULL,
-        ODataLogicalOperatorInterface $value = NULL) {
-
+    public function __construct($property = NULL, $value = NULL) {
+        parent::__construct($property, $value);
+        $this->operator('and');
     }
 
-    public function property($property = NULL) {
-        if (isset($property)) {
-            if ($property instanceof ODataLogicalOperatorInterface) {
-                $this->property = $property;
-            }
-            return $this;
-        }
-        return $this->property;
-    }
-
-    public function value($value = NULL) {
-        if (isset($value)) {
-            if ($value instanceof ODataLogicalOperatorInterface) {
-                $this->value = $value;
-            }
-            return $this;
-        }
-        return $this->value;
-    }
-
-    public function _and(ODataLogicalOperatorInterface $value) {
+    public function _and($value) {
         return new ODataAndOperator($this, $value);
     }
 
-    public function _or(ODataLogicalOperatorInterface $value) {
+    public function _or($value) {
         return new ODataOrOperator($this, $value);
     }
 
     public function __toString() {
         $property = $this->property();
         $value = $this->value();
+        $op = $this->operator();
         if ($property instanceof ODataConditionalInterface) {
             $property = "($property)";
         }
@@ -56,6 +35,6 @@ class ODataAndOperator implements ODataLogicalOperatorInterface, ODataConditiona
             $value = "($value)";
         }
 
-        return "$property and $value";
+        return "$property $op $value";
     }
 }
