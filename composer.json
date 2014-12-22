@@ -1,0 +1,26 @@
+{
+  "name": "curiosity26/ODataQuery-PHP",
+  "description": "A library of PHP Classes that allow for OData queries to be easily built and extended for appending to a URL Request to an API supporting OData server-side.",
+  "minimum-stability": "dev",
+  "license": "GPL-2.0",
+  "version": "1.0.0-dev",
+  "time": "2014-12-21",
+  "authors": [
+    {
+      "name": "Alex Boyce",
+      "email": "curiosity@gmail.com",
+      "homepage": "http://www.alex-boyce.me/",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/curiosity26/ODataQuery-PHP/issues",
+    "wiki": "https://github.com/curiosity26/ODataQuery-PHP/wiki",
+    "source": "https://github.com/curiosity26/ODataQuery-PHP.git"
+  },
+  "autoload" : {
+    "psr-4": {
+      "ODataQuery" : "src/"
+    }
+  }
+}
