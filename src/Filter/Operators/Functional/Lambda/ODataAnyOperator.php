@@ -9,13 +9,13 @@
 namespace ODataQuery\Filter\Operators\Functional\Lambda;
 
 
+use ODataQuery\Filter\ODataQueryFilterInterface;
 use ODataQuery\Filter\Operators\Functional\ODataFunctionalOperator;
-use ODataQuery\Filter\Operators\Logical\ODataLogicalOperatorInterface;
 
 class ODataAnyOperator extends ODataFunctionalOperator {
     protected $argument = FALSE;
 
-    public function __construct($property = NULL, ODataLogicalOperatorInterface $argument = NULL) {
+    public function __construct($property = NULL, ODataQueryFilterInterface $argument = NULL) {
         parent::__construct('any', $property);
         $this->argument = $argument;
     }
