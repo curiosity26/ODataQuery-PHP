@@ -10,7 +10,7 @@ namespace ODataQuery;
 
 
 class ODataCount implements ODataQueryOptionInterface {
-    private $property;
+    protected $property;
 
     public function __construct($property = NULL) {
         $this->property($property);

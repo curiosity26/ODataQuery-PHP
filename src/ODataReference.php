@@ -10,7 +10,7 @@ namespace ODataQuery;
 
 
 class ODataReference implements ODataQueryOptionInterface {
-    private $property;
+    protected $property;
 
     public function __construct($property = NULL) {
         $this->property($property);

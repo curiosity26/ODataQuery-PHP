@@ -12,8 +12,8 @@ namespace ODataQuery\Pager;
 use ODataQuery\ODataQueryOptionInterface;
 
 class ODataQueryPager implements ODataQueryOptionInterface {
-    private $top = 500;
-    private $page = 0;
+    protected $top = 500;
+    protected $page = 0;
 
     public function limit($limit = NULL) {
         if (isset($limit)) {
@@ -50,5 +50,9 @@ class ODataQueryPager implements ODataQueryOptionInterface {
             '$top' => $this->limit(),
             '$skip' => $this->skip()
         );
+    }
+
+    public function __toString() {
+        return implode('&', $this->build());
     }
 }

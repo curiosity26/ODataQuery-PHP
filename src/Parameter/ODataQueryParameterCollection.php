@@ -12,7 +12,7 @@ namespace ODataQuery\Parameter;
 use ODataQuery\ODataQueryOptionInterface;
 
 class ODataQueryParameterCollection implements \Countable, \OuterIterator, ODataQueryOptionInterface {
-    private $collection;
+    protected $collection;
 
     public function __construct($items = NULL) {
         $this->collection = new \ArrayObject($items);
@@ -62,7 +62,7 @@ class ODataQueryParameterCollection implements \Countable, \OuterIterator, OData
 
     public function __toString() {
         $build = $this->build();
-        return http_build_query($build);
+        return implode('&', $build);
     }
 
     public function __set($name, $value) {

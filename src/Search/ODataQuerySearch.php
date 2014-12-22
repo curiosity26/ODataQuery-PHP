@@ -12,8 +12,8 @@ namespace ODataQuery\Search;
 use ODataQuery\ODataQueryOptionInterface;
 
 class ODataQuerySearch implements ODataQueryOptionInterface, ODataQuerySearchInterface {
-    private $query;
-    private $conditionals = array();
+    protected $query;
+    protected $conditionals = array();
 
     public function __construct($query = NULL) {
         $this->query($query);

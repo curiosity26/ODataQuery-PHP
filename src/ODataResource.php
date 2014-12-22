@@ -16,13 +16,13 @@ use ODataQuery\Search\ODataQuerySearch;
 use ODataQuery\Select\ODataQuerySelect;
 
 class ODataResource implements ODataQueryOptionInterface, ODataResourceInterface {
-    private $pager;
-    private $filter;
-    private $search;
-    private $select;
-    private $expand;
-    private $count = FALSE;
-    private $orderBy;
+    protected $pager;
+    protected $filter;
+    protected $search;
+    protected $select;
+    protected $expand;
+    protected $count = FALSE;
+    protected $orderBy;
 
     public function __construct(ODataQueryFilterInterface $filter = NULL, ODataQuerySelect $select = NULL,
         ODataResource $expand = NULL, ODataQueryPager $pager = NULL,

@@ -13,7 +13,7 @@ use ODataQuery\ODataQueryOptionInterface;
 use ODataQuery\ODataResourceInterface;
 
 class ODataQueryExpandCollection implements ODataExpandableInterface, ODataQueryOptionInterface {
-    private $collection = array();
+    protected $collection = array();
     public function __construct(array $collection = NULL) {
         if (isset($collection)) {
             foreach ($collection as $item) {

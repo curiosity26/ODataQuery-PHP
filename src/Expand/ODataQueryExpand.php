@@ -16,8 +16,8 @@ use ODataQuery\Search\ODataQuerySearch;
 use ODataQuery\Select\ODataQuerySelect;
 
 class ODataQueryExpand extends ODataResource {
-    private $limits;
-    private $property;
+    protected $limits;
+    protected $property;
 
     public function __construct($property = NULL, ODataQueryFilterInterface $filter = NULL,
         ODataQuerySelect $select = NULL, ODataResource $expand = NULL, ODataQueryPager $pager = NULL,

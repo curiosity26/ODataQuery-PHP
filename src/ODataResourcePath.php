@@ -21,9 +21,9 @@ class ODataResourcePath extends ODataResource {
     const ORDER_ASC = 'ASC';
     const ORDER_DESC = 'DESC';
 
-    private $path;
-    private $parameters = array();
-    private $order = self::ORDER_ASC;
+    protected $path;
+    protected $parameters = array();
+    protected $order = self::ORDER_ASC;
 
     public function __construct($path = NULL, ODataQueryFilterInterface $filter, ODataQuerySelect $select = NULL,
         ODataExpandableInterface $expand = NULL, ODataQueryPager $pager = NULL,
@@ -53,6 +53,10 @@ class ODataResourcePath extends ODataResource {
         }
 
         return $this->parameters;
+    }
+
+    public function build() {
+        return parent::build() + array('$order', $this->order) + $this->parameters()->build();
     }
 
     public function __toString() {
