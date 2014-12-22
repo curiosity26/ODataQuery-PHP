@@ -22,5 +22,8 @@
     "psr-4": {
       "ODataQuery" : "src/"
     }
+  },
+  "require": {
+    "phpunit.phpunit": "4.3.*"
   }
 }
