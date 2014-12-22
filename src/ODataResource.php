@@ -107,6 +107,6 @@ class ODataResource implements ODataQueryOptionInterface, ODataResourceInterface
 
     public function __toString() {
        $build = $this->build();
-       return http_build_query($build);
+       return implode('&', $build);
     }
 }
