@@ -9,10 +9,9 @@
 namespace ODataQuery\Filter\Operators\Functional\DateTime;
 
 
-use ODataQuery\Filter\Operators\Functional\ODataComparableFunctionOperator;
-
-class ODataTimeOperator extends ODataComparableFunctionOperator {
+class ODataTimeOperator extends ODataDateTimeOperator {
     public function __construct($property = NULL) {
         parent::__construct('time', $property);
+        $this->format = 'H:i:s e';
     }
 }

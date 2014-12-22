@@ -9,9 +9,7 @@
 namespace ODataQuery\Filter\Operators\Functional\DateTime;
 
 
-use ODataQuery\Filter\Operators\Functional\ODataComparableFunctionOperator;
-
-class ODataMaxDateTimeOperator extends ODataComparableFunctionOperator {
+class ODataMaxDateTimeOperator extends ODataDateTimeOperator {
     public function __construct() {
         parent::__construct('maxdatetime');
     }
