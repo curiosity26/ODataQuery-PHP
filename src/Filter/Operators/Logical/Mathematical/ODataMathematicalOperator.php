@@ -20,7 +20,7 @@ use ODataQuery\Filter\Operators\ODataComparableInterface;
 class ODataMathematicalOperator extends ODataLogicalOperator implements ODataComparableInterface {
     public function __construct($property = NULL, $value = NULL, $operator = NULL) {
         parent::__construct($property, $value);
-        $this->operator($operator);
+        $this->operator = $operator;
     }
 
     public function equals($value) {
@@ -48,9 +48,9 @@ class ODataMathematicalOperator extends ODataLogicalOperator implements ODataCom
     }
 
     public function __toString() {
-        $property = $this->property();
-        $value = $this->value();
-        $op = $this->operator();
+        $property = $this->property;
+        $value = $this->value;
+        $op = $this->operator;
 
         if ($property instanceof ODataMathematicalOperator) {
             $property = "($property)";
