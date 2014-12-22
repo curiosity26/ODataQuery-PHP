@@ -9,9 +9,9 @@
 namespace ODataQuery\Filter\Operators\Functional\Geo;
 
 
-use ODataQuery\Filter\Operators\Functional\ODataFunctionalOperator;
+use ODataQuery\Filter\Operators\Functional\ODataComparableFunctionOperator;
 
-class ODataGeoLengthOperator extends ODataFunctionalOperator {
+class ODataGeoLengthOperator extends ODataComparableFunctionOperator {
     public function __construct($property = NULL) {
         parent::__construct('geo.length', $property);
     }

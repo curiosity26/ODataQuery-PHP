@@ -9,16 +9,16 @@
 namespace ODataQuery\Filter\Operators\Functional\Geo;
 
 
-use ODataQuery\Filter\Operators\Functional\ODataFunctionalOperator;
+use ODataQuery\Filter\Operators\Functional\ODataComparableFunctionOperator;
 
-class ODataGeoDistanceOperator extends ODataFunctionalOperator {
+class ODataGeoDistanceOperator extends ODataComparableFunctionOperator {
     public function __construct($point1 = NULL, $point2 = NULL) {
         parent::__construct('geo.distance');
         $this->points($point1, $point2);
     }
 
     public function points($point1 = NULL, $point2 = NULL) {
-        $args = $this->arguments;
+        $args = &$this->arguments;
         if (isset($point1) || isset($point2)) {
             if (isset($point1)) {
                 $args[0] = $point1;
