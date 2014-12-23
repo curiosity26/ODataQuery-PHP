@@ -61,7 +61,7 @@ See the Expand section below to learn how select can be applied to specific prop
 
 You can search the properties of the object set using search:
 ```PHP
-$path->search(new ODataQuerySearch('mountain bike');
+$path->search(new ODataQuerySearch('mountain bike'));
 ```
 Search queries are also chainable:
 ```PHP
