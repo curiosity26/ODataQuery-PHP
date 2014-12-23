@@ -9,7 +9,7 @@ A library of PHP Classes that allow for OData queries to be easily built and ext
 
 Add the following to your composer.json file:
 
-```
+```JSON
 "require": {
     "curiosity26/odataquery": "dev-master"
 }
