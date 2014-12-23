@@ -3,6 +3,18 @@ ODataQuery-PHP
 
 A library of PHP Classes that allow for OData queries to be easily built and extended for appending to a URL Request to a server-side API supporting OData.
 
+<h2>Installation</h2>
+
+ODataQuery-PHP is packaged for Composer. If you don't have composer installed, go to https://getcomposer.org/ download and install.
+
+Once composer is installed, use your command line terminal and cd into the ODataQuery-PHP folder. Run 'composer install'. If you have composer installed correctly, it should work fine and you'll see a new directory created called 'vendors'. Within the vendors folder there is an autoload.php file created by composer.
+
+Include this autoloader when loading your own code module or on any scripts that you are using ODataQuery-PHP in.
+```
+$autoloader = "/path/to/ODataQuery-PHP/vendor/autoload.php";
+require_once $autoloader;
+```
+
 <h2>Example</h2>
 
 Our base API URL:
@@ -137,16 +149,4 @@ Results can be sorted by a property name within the collection. Simply specify w
 
 ```
 $path->orderBy('LastName');
-```
-
-<h2>Installation</h2>
-
-ODataQuery-PHP is packaged for Composer. If you don't have composer installed, go to https://getcomposer.org/ download and install.
-
-Once composer is installed, use your command line terminal and cd into the ODataQuery-PHP folder. Run 'composer install'. If you have composer installed correctly, it should work fine and you'll see a new directory created called 'vendors'. Within the vendors folder there is an autoload.php file created by composer.
-
-Include this autoloader when loading your own code module or on any scripts that you are using ODataQuery-PHP in.
-```
-$autoloader = "/path/to/ODataQuery-PHP/vendor/autoload.php";
-require_once $autoloader;
 ```
