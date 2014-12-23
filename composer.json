@@ -14,6 +14,10 @@
       "role": "Developer"
     }
   ],
+  "dist": {
+    "url": "https://github.com/curiosity26/ODataQuery-PHP.git",
+    "type": "git"
+  },
   "support": {
     "issues": "https://github.com/curiosity26/ODataQuery-PHP/issues",
     "wiki": "https://github.com/curiosity26/ODataQuery-PHP/wiki",
