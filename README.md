@@ -5,6 +5,17 @@ A library of PHP Classes that allow for OData queries to be easily built and ext
 
 <h2>Installation</h2>
 
+<h3>Included in a PHP Project w/ Composer</h3>
+
+Add the following to your composer.json file:
+
+```
+"require": {
+    "curiosity26/odataquery": "dev-master"
+}
+```
+
+<h3>Standalone Project</h3>
 ODataQuery-PHP is packaged for Composer. If you don't have composer installed, go to https://getcomposer.org/ download and install.
 
 Once composer is installed, use your command line terminal and cd into the ODataQuery-PHP folder. Run 'composer install'. If you have composer installed correctly, it should work fine and you'll see a new directory created called 'vendors'. Within the vendors folder there is an autoload.php file created by composer.
