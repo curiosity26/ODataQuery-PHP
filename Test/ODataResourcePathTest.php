@@ -30,10 +30,26 @@ class ODataResourcePathTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('api/Objects?$filter=TestValue eq 4&$order=ASC', (string)$output);
     }
 
+    public function testPager() {
+        $output = new \ODataQuery\ODataResourcePath('api/Objects');
+        $output->pager(new \ODataQuery\Pager\ODataQueryPager(50, 4));
+        $this->assertEquals('api/Objects?$top=50&$skip=200&$order=ASC', (string)$output);
+    }
+
     public function testOrderBy() {
         $output = new \ODataQuery\ODataResourcePath('api/Objects');
         $output->orderBy('Property');
         $this->assertEquals('api/Objects?$orderby=Property&$order=ASC', (string)$output);
+    }
+
+    public function testParameters() {
+        $output = new \ODataQuery\ODataResourcePath('api/Objects');
+        $params = new \ODataQuery\Parameter\ODataQueryParameterCollection();
+        $params->prop = 'Property';
+        $output->parameters($params);
+        $this->assertEquals('api/Objects?$order=ASC&@prop=Property', (string)$output);
+        $params->test = 'TestProperty';
+        $this->assertEquals('api/Objects?$order=ASC&@prop=Property&@test=TestProperty', (string)$output);
     }
 
     public function testExpand() {
