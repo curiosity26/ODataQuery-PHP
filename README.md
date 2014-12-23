@@ -126,7 +126,6 @@ $path->expand($collection);
 ```
 
 <h2>Resource Path Only<h2>
-
 <h3>Parameters</h3>
 
 Parameters can be used in place of any property of value in any query object. Prefix the variable name with '@' when using the variable. Use the ODataQueryParameterCollection object and set your parameters as if you were setting public variables on the object.
