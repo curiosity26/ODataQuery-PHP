@@ -12,8 +12,9 @@ namespace ODataQuery\Expand;
 use ODataQuery\ODataQueryOptionInterface;
 use ODataQuery\ODataResourceInterface;
 
-class ODataQueryExpandCollection implements ODataExpandableInterface, ODataQueryOptionInterface {
+class ODataQueryExpandCollection implements ODataExpandableCollectionInterface, ODataQueryOptionInterface {
     protected $collection = array();
+
     public function __construct(array $collection = NULL) {
         if (isset($collection)) {
             foreach ($collection as $item) {
@@ -25,22 +26,25 @@ class ODataQueryExpandCollection implements ODataExpandableInterface, ODataQuery
     }
 
     public function add(ODataQueryExpand $item) {
-        $name = $item->property();
+        $name = (string)$item->property();
         $this->collection[$name] = $item;
         return $this;
     }
 
     public function remove(ODataQueryExpand $item) {
-        $name = $item->property();
+        $name = (string)$item->property();
         unset($this->collection[$name]);
         return $this;
     }
 
     public function get($property = NULL) {
-        return isset($property) ? $this->collection[$property] : $this->collection;
+        return isset($property) ? $this->collection[(string)$property] : $this->collection;
     }
 
     public function __toString() {
-        return implode(",", $this->collection);
+        if (!empty($this->collection)) {
+            return implode(",", $this->collection);
+        }
+        return NULL;
     }
 }

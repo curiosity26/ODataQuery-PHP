@@ -15,6 +15,11 @@ class ODataQueryPager implements ODataQueryOptionInterface {
     protected $top = 500;
     protected $page = 0;
 
+    public function __construct($limit = NULL, $page = 0) {
+        $this->limit($limit);
+        $this->page($page);
+    }
+
     public function limit($limit = NULL) {
         if (isset($limit)) {
             if ($limit > 0) {
@@ -53,6 +58,10 @@ class ODataQueryPager implements ODataQueryOptionInterface {
     }
 
     public function __toString() {
-        return implode('&', $this->build());
+        $output = array();
+        foreach ($this->build() as $param => $value) {
+            $output[] = "$param=$value";
+        }
+        return implode('&', $output);
     }
 }

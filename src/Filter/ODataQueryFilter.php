@@ -25,4 +25,14 @@ abstract class ODataQueryFilter implements ODataQueryFilterInterface {
       $this->$name = $value;
     }
   }
+
+  public function __isset($name) {
+    return property_exists($this, $name) && isset($this->$name);
+  }
+
+  public function __unset($name) {
+    if(property_exists($this, $name)) {
+      unset($this->$name);
+    }
+  }
 }

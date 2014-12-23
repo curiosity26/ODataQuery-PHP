@@ -9,6 +9,7 @@
 namespace ODataQuery;
 
 
+use ODataQuery\Expand\ODataExpandableCollectionInterface;
 use ODataQuery\Expand\ODataExpandableInterface;
 use ODataQuery\Filter\ODataQueryFilterInterface;
 use ODataQuery\Pager\ODataQueryPager;
@@ -65,10 +66,10 @@ class ODataResource implements ODataQueryOptionInterface, ODataResourceInterface
             $this->select = $select;
             return $this;
         }
-        return $this->search;
+        return $this->select;
     }
 
-    public function expand(ODataExpandableInterface $expand = NULL) {
+    public function expand(ODataExpandableCollectionInterface $expand = NULL) {
         if (isset($expand)) {
             $this->expand = $expand;
             return $this;
@@ -96,7 +97,12 @@ class ODataResource implements ODataQueryOptionInterface, ODataResourceInterface
                 '$search' => $this->search(),
                 '$expand' => $this->expand(),
                 '$orderBy' => $this->orderBy,
-            ) + $this->pager()->build();
+            );
+
+        $pager = $this->pager();
+        if (isset($pager)) {
+            $build += $pager->build();
+        }
 
         // Count Overrides other parameters
         if ($this->count === TRUE) {

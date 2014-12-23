@@ -32,7 +32,7 @@ class ODataQuerySearch implements ODataQueryOptionInterface, ODataQuerySearchInt
             return $query;
         }
         $query = trim($query);
-        if (preg_match('/\s+/', $query) !== FALSE) {
+        if (preg_match('/\s+/', $query) != FALSE) {
             $query = "\"$query\"";
         }
         return $query;
@@ -50,8 +50,16 @@ class ODataQuerySearch implements ODataQueryOptionInterface, ODataQuerySearchInt
         return $this;
     }
 
+    public function clear() {
+        $this->conditionals = array();
+        return $this;
+    }
+
     public function __toString() {
         $query = $this->query();
+        if ($query instanceof ODataQuerySearchInterface) {
+            $query = "($query)";
+        }
         foreach ($this->conditionals as $conditional) {
             $op = $conditional[0];
             $condition = is_string($conditional[1]) ? $conditional[1] : "({$conditional[1]})";

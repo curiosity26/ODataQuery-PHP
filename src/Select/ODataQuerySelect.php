@@ -9,11 +9,13 @@
 namespace ODataQuery\Select;
 
 use ODataQuery\ODataQueryOptionInterface;
+use ODataQuery\ODataResource;
+use ODataQuery\ODataResourceInterface;
 
 class ODataQuerySelect implements ODataQueryOptionInterface {
     protected $properties = array();
 
-    public function __construct(array $properties = NULL) {
+    public function __construct(array $properties = array()) {
         $this->properties = $properties;
     }
 

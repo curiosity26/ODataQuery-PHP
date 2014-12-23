@@ -15,7 +15,7 @@ use ODataQuery\Pager\ODataQueryPager;
 use ODataQuery\Search\ODataQuerySearch;
 use ODataQuery\Select\ODataQuerySelect;
 
-class ODataQueryExpand extends ODataResource {
+class ODataQueryExpand extends ODataResource implements ODataExpandableInterface {
     protected $limits;
     protected $property;
 
@@ -38,9 +38,10 @@ class ODataQueryExpand extends ODataResource {
         if (isset($limits)) {
             if (is_int($limits)) {
                 $this->limits = $limits;
+                return $this;
             }
         }
-        return $this;
+        return $this->limits;
     }
 
     public function build() {
@@ -52,10 +53,18 @@ class ODataQueryExpand extends ODataResource {
     }
 
     public function __toString() {
-        $output = $this->property();
-        $args = implode(", ", $this->build());
-        if (strlen($args) > 0) {
-            $output .= "($args)";
+        $output = (string)$this->property();
+        $build = $this->build();
+        $args = array();
+        if (!empty($build)) {
+            foreach ($build as $param => $value) {
+                $args[] = "$param=$value";
+            }
+
+            if (count($args) > 0) {
+                $args = implode("&", $args);
+                $output .= "($args)";
+            }
         }
 
         return $output;
