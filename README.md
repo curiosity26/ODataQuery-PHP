@@ -113,9 +113,7 @@ $path->expand($collection);
 // OUTPUT PATH: http://www.example.com/test/api/Employees?$expand=FirstName($filter=$it eq 'Alex'),LastName($search=Boyce),Address($expand=City($search="New York"))&$order=ASC
 ```
 <h2>Resource Path Only<h2>
-
 <h3>Parameters</h3>
-
 Parameters can be used in place of any property of value in any query object. Prefix the variable name with '@' when using the variable. Use the ODataQueryParameterCollection object and set your parameters as if you were setting public variables on the object.
 ```
 $params = new ODataQueryParameterCollection();
@@ -129,8 +127,17 @@ $path->filter($filter)->parameters($params);
 // OUTPUT PATH: http://www.example.com/test/api/Employees?$filter=@otherParam le @myParam1&$order=ASC&@myParam1=10&@otherParam=Other
 ```
 <h3>$orderby</h3>
-
 Results can be sorted by a property name within the collection. Simply specify which property you would like to sort by in the orderBy() function.
 ```
 $path->orderBy('LastName');
+```
+<h2>Installation</h2>
+ODataQuery-PHP is packaged for Composer. If you don't have composer installed, go to https://getcomposer.org/ download and install.
+
+Once composer is installed, use your command line terminal and cd into the ODataQuery-PHP folder. Run 'composer install'. If you have composer installed correctly, it should work fine and you'll see a new directory created called 'vendors'. Within the vendors folder there is an autoload.php file created by composer.
+
+Include this autoloader when loading your own code module or on any scripts that you are using ODataQuery-PHP in.
+```
+$autoloader = "/path/to/ODataQuery-PHP/vendor/autoload.php";
+require_once $autoloader;
 ```
