@@ -112,6 +112,7 @@ $path->expand($collection);
 
 // OUTPUT PATH: http://www.example.com/test/api/Employees?$expand=FirstName($filter=$it eq 'Alex'),LastName($search=Boyce),Address($expand=City($search="New York"))&$order=ASC
 ```
+
 <h2>Resource Path Only<h2>
 <h3>Parameters</h3>
 Parameters can be used in place of any property of value in any query object. Prefix the variable name with '@' when using the variable. Use the ODataQueryParameterCollection object and set your parameters as if you were setting public variables on the object.
@@ -130,9 +131,11 @@ $path->filter($filter)->parameters($params);
 
 <h3>$orderby</h3>
 Results can be sorted by a property name within the collection. Simply specify which property you would like to sort by in the orderBy() function.
+
 ```
 $path->orderBy('LastName');
 ```
+
 <h2>Installation</h2>
 ODataQuery-PHP is packaged for Composer. If you don't have composer installed, go to https://getcomposer.org/ download and install.
 
