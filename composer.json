@@ -1,5 +1,5 @@
 {
-  "name": "curiosity26/ODataQuery-PHP",
+  "name": "curiosity26/odataquery",
   "description": "A library of PHP Classes that allow for OData queries to be easily built and extended for appending to a URL Request to an API supporting OData server-side.",
   "minimum-stability": "dev",
   "prefer-stable": true,
