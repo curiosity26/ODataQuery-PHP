@@ -16,14 +16,14 @@
   "support": {
     "issues": "https://github.com/curiosity26/ODataQuery-PHP/issues",
     "wiki": "https://github.com/curiosity26/ODataQuery-PHP/wiki",
-    "source": "https://github.com/curiosity26/ODataQuery-PHP.git"
+    "source": "https://github.com/curiosity26/ODataQuery-PHP"
   },
   "autoload" : {
     "psr-4": {
       "ODataQuery\\" : "src/"
     }
   },
-  "require": {
+  "require-dev": {
     "phpunit/phpunit": "4.*.*"
   }
 }
