@@ -53,7 +53,7 @@ myFakeFunction((string)$path);
 
 You can select which properties of the returned objects are included:
 ```PHP
-$path->select(new ODataQuerySelect(array("FirstName", "LastName)));
+$path->select(new ODataQuerySelect(array("FirstName", "LastName")));
 ```
 See the Expand section below to learn how select can be applied to specific properties.
 
