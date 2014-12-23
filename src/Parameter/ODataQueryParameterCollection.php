@@ -14,8 +14,14 @@ use ODataQuery\ODataQueryOptionInterface;
 class ODataQueryParameterCollection implements \Countable, \OuterIterator, ODataQueryOptionInterface {
     protected $collection;
 
-    public function __construct($items = NULL) {
-        $this->collection = new \ArrayObject($items);
+    public function __construct(array $items = NULL) {
+        $this->collection = new \ArrayObject();
+        if (isset($items)) {
+            foreach($items as $name => $item) {
+                $this->collection["@$name"] = $item;
+            }
+        }
+
     }
 
     public function count() {
@@ -62,7 +68,11 @@ class ODataQueryParameterCollection implements \Countable, \OuterIterator, OData
 
     public function __toString() {
         $build = $this->build();
-        return implode('&', $build);
+        $output = array();
+        foreach ($build as $name => $value) {
+            $output[] = "$name=$value";
+        }
+        return implode('&', $output);
     }
 
     public function __set($name, $value) {
@@ -71,6 +81,14 @@ class ODataQueryParameterCollection implements \Countable, \OuterIterator, OData
 
     public function __get($name) {
         return $this->collection['@'.$name];
+    }
+
+    public function __isset($name) {
+        return isset($this->collection["@$name"]);
+    }
+
+    public function __unset($name) {
+        unset($this->collection["@name"]);
     }
 
 }

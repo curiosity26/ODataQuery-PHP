@@ -12,5 +12,6 @@ namespace ODataQuery\Search;
 interface ODataQuerySearchInterface {
     public function _and($conditional);
     public function _or($conditional);
+    public function clear();
     public function __toString();
 }
