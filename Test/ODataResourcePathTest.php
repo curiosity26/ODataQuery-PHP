@@ -9,37 +9,37 @@
 class ODataResourcePathTest extends PHPUnit_Framework_TestCase {
     public function testPath() {
         $output = new \ODataQuery\ODataResourcePath('api/Objects');
-        $this->assertEquals('api/Objects?$order=ASC', (string)$output);
+        $this->assertEquals('api/Objects?', (string)$output);
     }
 
     public function testSelect() {
         $output = new \ODataQuery\ODataResourcePath('api/Objects');
         $output->select(new \ODataQuery\Select\ODataQuerySelect(array("Prop1", "Prop2")));
-        $this->assertEquals('api/Objects?$select=Prop1,Prop2&$order=ASC', (string)$output);
+        $this->assertEquals('api/Objects?$select=Prop1,Prop2', (string)$output);
     }
 
     public function testSearch() {
         $output = new \ODataQuery\ODataResourcePath('api/Objects');
         $output->search(new \ODataQuery\Search\ODataQuerySearch("mountain bike"));
-        $this->assertEquals('api/Objects?$search="mountain bike"&$order=ASC', (string)$output);
+        $this->assertEquals('api/Objects?$search="mountain bike"', (string)$output);
     }
 
     public function testFilter() {
         $output = new \ODataQuery\ODataResourcePath('api/Objects');
         $output->filter(new \ODataQuery\Filter\Operators\Logical\ODataEqualsOperator("TestValue", 4));
-        $this->assertEquals('api/Objects?$filter=TestValue eq 4&$order=ASC', (string)$output);
+        $this->assertEquals('api/Objects?$filter=TestValue eq 4', (string)$output);
     }
 
     public function testPager() {
         $output = new \ODataQuery\ODataResourcePath('api/Objects');
         $output->pager(new \ODataQuery\Pager\ODataQueryPager(50, 4));
-        $this->assertEquals('api/Objects?$top=50&$skip=200&$order=ASC', (string)$output);
+        $this->assertEquals('api/Objects?$top=50&$skip=200', (string)$output);
     }
 
     public function testOrderBy() {
         $output = new \ODataQuery\ODataResourcePath('api/Objects');
         $output->orderBy('Property');
-        $this->assertEquals('api/Objects?$orderby=Property&$order=ASC', (string)$output);
+        $this->assertEquals('api/Objects?$orderby=Property', (string)$output);
     }
 
     public function testParameters() {
@@ -47,9 +47,9 @@ class ODataResourcePathTest extends PHPUnit_Framework_TestCase {
         $params = new \ODataQuery\Parameter\ODataQueryParameterCollection();
         $params->prop = 'Property';
         $output->parameters($params);
-        $this->assertEquals('api/Objects?$order=ASC&@prop=Property', (string)$output);
+        $this->assertEquals('api/Objects?@prop=Property', (string)$output);
         $params->test = 'TestProperty';
-        $this->assertEquals('api/Objects?$order=ASC&@prop=Property&@test=TestProperty', (string)$output);
+        $this->assertEquals('api/Objects?@prop=Property&@test=TestProperty', (string)$output);
     }
 
     public function testExpand() {
@@ -63,7 +63,7 @@ class ODataResourcePathTest extends PHPUnit_Framework_TestCase {
         $expand->expand(new \ODataQuery\Expand\ODataQueryExpandCollection(array($expand2)));
         $output->expand(new \ODataQuery\Expand\ODataQueryExpandCollection(array($expand)));
         $output->parameters($params);
-        $this->assertEquals('api/Objects?$expand=@prop($search=google&$expand=SubProperty($filter=SubSubProperty lt 4)&$top=20&$skip=100)&$order=ASC&@prop=Property', (string)$output);
+        $this->assertEquals('api/Objects?$expand=@prop($search=google&$expand=SubProperty($filter=SubSubProperty lt 4)&$top=20&$skip=100)&@prop=Property', (string)$output);
     }
 
 }

@@ -41,7 +41,7 @@ $path = new ODataResourcePath($apiUrl.$property);
 The created path can be used just like a string variable:
 ```
 print $path;
-// http://www.example.com/test/api/Employees?$order=ASC (The $order is always added to the path)
+// http://www.example.com/test/api/Employees?
 ```
 If you to force the path to be used as a string (sometimes helpful when passing as a variable into a function that requires a string parameter) you can simply cast the ODataResourcePath object as a string. The goes for any object in the ODataQuery library.
 ```
@@ -104,6 +104,15 @@ Records can be paged server-side by passing $top and $skip where $top is the lim
 $pager = new ODataQueryPager(20, 5); // $top=20&$skip=100
 $path->pager($pager);
 ```
+
+<h3>$orderby</h3>
+
+Results can be sorted by a property name within the collection. Simply specify which property you would like to sort by in the orderBy() function.
+
+```
+$path->orderBy('LastName');
+```
+
 <h3>$expand</h3>
 
 The ODataQueryExpand object is used to subquery the results of the main query. It can be applied to properties of the main query's recordset using OData's path format (Property1/SubProperty1/AndSoOn) or to an expanded upon property (deep injection).
@@ -151,12 +160,4 @@ $filter = new ODataLessThanEquals('@otherPraram', '@myParam1');
 $path->filter($filter)->parameters($params);
 
 // OUTPUT PATH: http://www.example.com/test/api/Employees?$filter=@otherParam le @myParam1&$order=ASC&@myParam1=10&@otherParam=Other
-```
-
-<h3>$orderby</h3>
-
-Results can be sorted by a property name within the collection. Simply specify which property you would like to sort by in the orderBy() function.
-
-```
-$path->orderBy('LastName');
 ```
