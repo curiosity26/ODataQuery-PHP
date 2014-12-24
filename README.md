@@ -43,7 +43,7 @@ $path = new ODataResourcePath($apiUrl.$property);
 The created path can be used just like a string variable:
 ```PHP
 print $path;
-// http://www.example.com/test/api/Employees?
+// http://www.example.com/test/api/Employees
 ```
 If you to force the path to be used as a string (sometimes helpful when passing as a variable into a function that requires a string parameter) you can simply cast the ODataResourcePath object as a string. The goes for any object in the ODataQuery library.
 ```PHP
