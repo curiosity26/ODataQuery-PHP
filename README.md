@@ -10,7 +10,7 @@ A library of PHP Classes that allow for OData queries to be easily built and ext
 Add the following to your composer.json file:
 ```JSON
 "require": {
-    "curiosity26/odataquery": "1.0.0"
+    "curiosity26/odataquery": "1.0.0" // Or the latest version number or 1.0.* to keep it fresh
 }
 ```
 or to use the bleeding edge developement version:
