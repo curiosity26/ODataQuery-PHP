@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Odataquery-php : A library of PHP Classes that allow for OData queries to be easily built and extended for appending to a URL Request to an API supporting OData server-side.">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Odataquery-php</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/curiosity26/ODataQuery-PHP">View on GitHub</a>
+
+          <h1 id="project_title">Odataquery-php</h1>
+          <h2 id="project_tagline">A library of PHP Classes that allow for OData queries to be easily built and extended for appending to a URL Request to an API supporting OData server-side.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/curiosity26/ODataQuery-PHP/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/curiosity26/ODataQuery-PHP/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="odataquery-php" class="anchor" href="#odataquery-php" aria-hidden="true"><span class="octicon octicon-link"></span></a>ODataQuery-PHP</h1>
+
+<p>A library of PHP Classes that allow for OData queries to be easily built and extended for appending to a URL Request to a server-side API supporting OData.</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<h3>
+<a id="included-in-a-php-project-w-composer" class="anchor" href="#included-in-a-php-project-w-composer" aria-hidden="true"><span class="octicon octicon-link"></span></a>Included in a PHP Project w/ Composer</h3>
+
+<p>Add the following to your composer.json file:</p>
+
+<div class="highlight highlight-JSON"><pre><span class="pl-s1"><span class="pl-pds">"</span>require<span class="pl-pds">"</span></span>: {
+    <span class="pl-s1"><span class="pl-pds">"</span>curiosity26/odataquery<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>dev-master<span class="pl-pds">"</span></span>
+}</pre></div>
+
+<h3>
+<a id="standalone-project" class="anchor" href="#standalone-project" aria-hidden="true"><span class="octicon octicon-link"></span></a>Standalone Project</h3>
+
+<p>ODataQuery-PHP is packaged for Composer. If you don't have composer installed, go to <a href="https://getcomposer.org/">https://getcomposer.org/</a> download and install.</p>
+
+<p>Once composer is installed, use your command line terminal and cd into the ODataQuery-PHP folder. Run 'composer install'. If you have composer installed correctly, it should work fine and you'll see a new directory created called 'vendors'. Within the vendors folder there is an autoload.php file created by composer.</p>
+
+<h2>
+<a id="basic-usage" class="anchor" href="#basic-usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Basic Usage</h2>
+
+<p>Include this autoloader when loading your own code module or on any scripts that you are using ODataQuery-PHP in.</p>
+
+<div class="highlight highlight-PHP"><pre><span class="pl-s2"><span class="pl-vo">$autoloader</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>/path/to/ODataQuery-PHP/vendor/autoload.php<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s2"><span class="pl-k">require_once</span> <span class="pl-vo">$autoloader</span>;</span></pre></div>
+
+<h2>
+<a id="example" class="anchor" href="#example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h2>
+
+<p>Our base API URL:</p>
+
+<div class="highlight highlight-PHP"><pre><span class="pl-s2"><span class="pl-vo">$apiUrl</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>http://www.example.com/test/api/<span class="pl-pds">"</span></span>;</span></pre></div>
+
+<p>First we'll build a path for the request of objects.
+(Namespaces will be implied in examples. Assuming you're using and IDE and the autoloader created by composer, these will be filled out for you anyway)</p>
+
+<div class="highlight highlight-PHP"><pre><span class="pl-s2"><span class="pl-vo">$property</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">'</span>Employees<span class="pl-pds">'</span></span>;</span>
+<span class="pl-s2"><span class="pl-vo">$path</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-s3">ODataResourcePath</span>(<span class="pl-vo">$apiUrl</span><span class="pl-k">.</span><span class="pl-vo">$property</span>);</span></pre></div>
+
+<p>The created path can be used just like a string variable:</p>
+
+<div class="highlight highlight-PHP"><pre><span class="pl-s2"><span class="pl-s3">print</span> <span class="pl-vo">$path</span>;</span>
+<span class="pl-s2"><span class="pl-c">// http://www.example.com/test/api/Employees</span></span></pre></div>
+
+<p>If you to force the path to be used as a string (sometimes helpful when passing as a variable into a function that requires a string parameter) you can simply cast the ODataResourcePath object as a string. The goes for any object in the ODataQuery library.</p>
+
+<div class="highlight highlight-PHP"><pre><span class="pl-s2">myFakeFunction((<span class="pl-st">string</span>)<span class="pl-vo">$path</span>);</span></pre></div>
+
+<h3>
+<a id="select" class="anchor" href="#select" aria-hidden="true"><span class="octicon octicon-link"></span></a>$select</h3>
+
+<p>You can select which properties of the returned objects are included:</p>
+
+<div class="highlight highlight-PHP"><pre><span class="pl-s2"><span class="pl-vo">$path</span><span class="pl-k">-&gt;</span>select(<span class="pl-k">new</span> <span class="pl-s3">ODataQuerySelect</span>(<span class="pl-s3">array</span>(<span class="pl-s1"><span class="pl-pds">"</span>FirstName<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>LastName<span class="pl-pds">"</span></span>)));</span></pre></div>
+
+<p>See the Expand section below to learn how select can be applied to specific properties.</p>
+
+<h3>
+<a id="search" class="anchor" href="#search" aria-hidden="true"><span class="octicon octicon-link"></span></a>$search</h3>
+
+<p>You can search the properties of the object set using search:</p>
+
+<div class="highlight highlight-PHP"><pre><span class="pl-s2"><span class="pl-vo">$path</span><span class="pl-k">-&gt;</span>search(<span class="pl-k">new</span> <span class="pl-s3">ODataQuerySearch</span>(<span class="pl-s1"><span class="pl-pds">'</span>mountain bike<span class="pl-pds">'</span></span>));</span></pre></div>
+
+<p>Search queries are also chainable:</p>
+
+<div class="highlight highlight-PHP"><pre><span class="pl-s2"><span class="pl-vo">$search</span> <span class="pl-k">=</span> <span class="pl-vo">$path</span><span class="pl-k">-&gt;</span>search(); </span>
+<span class="pl-s2"><span class="pl-c">// operations functions are both setters and getters. When setting, the funciton returns the $path object for chainability</span></span>
+<span class="pl-s2"><span class="pl-vo">$search</span><span class="pl-k">-&gt;</span>_and(<span class="pl-s1"><span class="pl-pds">'</span>balloon<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s2"><span class="pl-vo">$path</span><span class="pl-k">-&gt;</span>search(<span class="pl-vo">$search</span>);</span></pre></div>
+
+<p>This will now search the set of Employees objects to be returned for '"mountain bike" AND balloon'. See the Expand section below to learn how the search function can be applied to specific properties.</p>
+
+<h3>
+<a id="count" class="anchor" href="#count" aria-hidden="true"><span class="octicon octicon-link"></span></a>$count</h3>
+
+<p>You can return the total record count of your query. The $count system query option ignores any $top, $skip, or $expand query options, and returns the total count of results across all pages including only those results matching any specified $filter and $search. Clients should be aware that the count returned inline may not exactly equal the actual number of items returned, due to latency between calculating the count and enumerating the last value or due to inexact calculations on the service.</p>
+
+<div class="highlight highlight-PHP"><pre><span class="pl-s2"><span class="pl-vo">$path</span><span class="pl-k">-&gt;</span>count();</span>
+<span class="pl-s2"><span class="pl-vo">$path</span><span class="pl-k">-&gt;</span>count(<span class="pl-c1">FALSE</span>); <span class="pl-c">// Disables $count</span></span></pre></div>
+
+<h3>
+<a id="filter" class="anchor" href="#filter" aria-hidden="true"><span class="octicon octicon-link"></span></a>$filter</h3>
+
+<p>The recordset queried can be filtered to return a more precise set of records. There are various filters available and most can be used in combination with another. </p>
+
+<div class="highlight highlight-PHP"><pre><span class="pl-s2"><span class="pl-vo">$filter</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-s3">ODataGreaterThanEqualsFilter</span>(<span class="pl-s1"><span class="pl-pds">'</span>YearsEmployed<span class="pl-pds">'</span></span>, <span class="pl-c1">6</span>); <span class="pl-c">// YearsEmployed ge 6</span></span>
+<span class="pl-s2"><span class="pl-vo">$path</span><span class="pl-k">-&gt;</span>filter(<span class="pl-vo">$filter</span>);</span></pre></div>
+
+<p>Each filter has a set of extensible functions that allow the filter to be passed into another filter, returning the new filter.</p>
+
+<div class="highlight highlight-PHP"><pre><span class="pl-s2"><span class="pl-vo">$add_filter</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-s3">ODataAddFilter</span>(<span class="pl-s1"><span class="pl-pds">'</span>YearsEmployed<span class="pl-pds">'</span></span>, <span class="pl-c1">5</span>); <span class="pl-c">// YearsEmployed add 5</span></span>
+<span class="pl-s2"><span class="pl-vo">$filter</span> <span class="pl-k">=</span> <span class="pl-vo">$add_filter</span><span class="pl-k">-&gt;</span>greaterThanEquals(<span class="pl-c1">6</span>); <span class="pl-c">// YearsEmployed add 5 ge 6</span></span>
+<span class="pl-s2"><span class="pl-vo">$path</span><span class="pl-k">-&gt;</span>filter(<span class="pl-vo">$filter</span>);</span></pre></div>
+
+<p>Filters can accept Filters as properties or values and a value can also be a property name</p>
+
+<div class="highlight highlight-PHP"><pre><span class="pl-s2"><span class="pl-vo">$sub_filter</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-s3">ODataSubtractFilter</span>(<span class="pl-s1"><span class="pl-pds">'</span>YearsEmployed<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>YearsSebatical<span class="pl-pds">'</span></span>); <span class="pl-c">// YearsEmployed sub YearsSebatical</span></span>
+<span class="pl-s2"><span class="pl-vo">$sub_filter2</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-s3">ODataAddFilter</span>(<span class="pl-s1"><span class="pl-pds">'</span>Awards<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>Demotions<span class="pl-pds">'</span></span>); <span class="pl-c">// Awards sub Demotions</span></span>
+<span class="pl-s2"><span class="pl-vo">$filter</span> <span class="pl-k">=</span> <span class="pl-vo">$sub_filter</span><span class="pl-k">-&gt;</span>greaterThan(<span class="pl-vo">$sub_filter2</span>); <span class="pl-c">// (YearsEmployed sub YearsSebatical) gt (Awards sub Demotions)</span></span>
+<span class="pl-s2"><span class="pl-vo">$path</span><span class="pl-k">-&gt;</span>filter(<span class="pl-vo">$filter</span>);</span></pre></div>
+
+<h3>
+<a id="pager" class="anchor" href="#pager" aria-hidden="true"><span class="octicon octicon-link"></span></a>$pager</h3>
+
+<p>Records can be paged server-side by passing $top and $skip where $top is the limit of records returned and $skip is the start offset. The ODataQueryPager object takes the math out of the equation and lets you simply specify the limit and the page you want to return.</p>
+
+<div class="highlight highlight-PHP"><pre><span class="pl-s2"><span class="pl-vo">$pager</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-s3">ODataQueryPager</span>(<span class="pl-c1">20</span>, <span class="pl-c1">5</span>); <span class="pl-c">// $top=20&amp;$skip=100</span></span>
+<span class="pl-s2"><span class="pl-vo">$path</span><span class="pl-k">-&gt;</span>pager(<span class="pl-vo">$pager</span>);</span></pre></div>
+
+<h3>
+<a id="orderby" class="anchor" href="#orderby" aria-hidden="true"><span class="octicon octicon-link"></span></a>$orderby</h3>
+
+<p>Results can be sorted by a property name within the collection. Simply specify which property you would like to sort by in the orderBy() function.</p>
+
+<div class="highlight highlight-PHP"><pre><span class="pl-s2"><span class="pl-vo">$path</span><span class="pl-k">-&gt;</span>orderBy(<span class="pl-s1"><span class="pl-pds">'</span>LastName<span class="pl-pds">'</span></span>);</span></pre></div>
+
+<h3>
+<a id="expand" class="anchor" href="#expand" aria-hidden="true"><span class="octicon octicon-link"></span></a>$expand</h3>
+
+<p>The ODataQueryExpand object is used to subquery the results of the main query. It can be applied to properties of the main query's recordset using OData's path format (Property1/SubProperty1/AndSoOn) or to an expanded upon property (deep injection).</p>
+
+<p>The ODataQueryExpand object is built off the same parent class as ODataResourcePath; ODataResource. So all of the above functions are available on the ODataQueryExpand object, including expand, which allows an expanded upon property to expand upon itself (deep injection).</p>
+
+<p>Because multiple properties can be expanded upon, the expand() function of ODataResourcePath and ODataQueryExpand require a collection of ODataExpandableInterface objects in the form of a single ODataQueryExpandCollection object. The ODataQueryExpand objects must be added to the ODataQueryExpandCollection which is then passed to the ODataResourcePath or ODataQueryExpand objects.</p>
+
+<div class="highlight highlight-PHP"><pre><span class="pl-s2"><span class="pl-vo">$collection</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-s3">ODataQueryExpandCollection</span>();</span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-vo">$expand1</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-s3">ODataQueryExpand</span>(<span class="pl-s1"><span class="pl-pds">'</span>FirstName<span class="pl-pds">'</span></span>); <span class="pl-c">// Expand upon the FirstName property</span></span>
+<span class="pl-s2"><span class="pl-vo">$filter</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-s3">ODataEqualsFilter</span>(<span class="pl-s1"><span class="pl-pds">'</span>$it<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>'Alex'<span class="pl-pds">"</span></span>); <span class="pl-c">// Only string filter functions safely wrap strings. Other filters can't distinguish between a regular string function or a property name</span></span>
+<span class="pl-s2"><span class="pl-vo">$expand1</span><span class="pl-k">-&gt;</span>filter(<span class="pl-vo">$filter</span>);</span>
+<span class="pl-s2"><span class="pl-vo">$collection</span><span class="pl-k">-&gt;</span>add(<span class="pl-vo">$expand1</span>);</span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-vo">$expand2</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-s3">ODataQueryExpand</span>(<span class="pl-s1"><span class="pl-pds">'</span>LastName<span class="pl-pds">'</span></span>); <span class="pl-c">// Expand upon the LastName property</span></span>
+<span class="pl-s2"><span class="pl-vo">$search</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-s3">ODataQuerySearch</span>(<span class="pl-s1"><span class="pl-pds">"</span>Boyce<span class="pl-pds">"</span></span>);</span>
+<span class="pl-s2"><span class="pl-vo">$expand2</span><span class="pl-k">-&gt;</span>search(<span class="pl-vo">$search</span>); <span class="pl-c">// Search the last name</span></span>
+<span class="pl-s2"><span class="pl-vo">$collection</span><span class="pl-k">-&gt;</span>add(<span class="pl-vo">$expand2</span>);</span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-vo">$expand3</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-s3">ODataQueryExpand</span>(<span class="pl-s1"><span class="pl-pds">'</span>Address<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s2"><span class="pl-vo">$expand4</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-s3">ODataQueryExpand</span>(<span class="pl-s1"><span class="pl-pds">'</span>City<span class="pl-pds">'</span></span>); <span class="pl-c">// Assuming the Address is an object containing City and not a sibling of City</span></span>
+<span class="pl-s2"><span class="pl-vo">$search2</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-s3">ODataQuerySearch</span>(<span class="pl-s1"><span class="pl-pds">'</span>New York<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s2"><span class="pl-vo">$expand4</span><span class="pl-k">-&gt;</span>search(<span class="pl-vo">$search2</span>);</span>
+<span class="pl-s2"><span class="pl-vo">$expand3</span><span class="pl-k">-&gt;</span>expand(<span class="pl-k">new</span> <span class="pl-s3">ODataQueryExpandCollection</span>(<span class="pl-s3">array</span>(<span class="pl-vo">$expand4</span>))); <span class="pl-c">// Add $expand4 to $expand3, wrapping it in a collection</span></span>
+<span class="pl-s2"><span class="pl-vo">$collection</span><span class="pl-k">-&gt;</span>add(<span class="pl-vo">$expand3</span>);</span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-vo">$path</span><span class="pl-k">-&gt;</span>expand(<span class="pl-vo">$collection</span>);</span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-c">// OUTPUT PATH: http://www.example.com/test/api/Employees?$expand=FirstName($filter=$it eq 'Alex'),LastName($search=Boyce),Address($expand=City($search="New York"))&amp;$order=ASC</span></span></pre></div>
+
+<p></p><h2>
+<a id="resource-path-onlyparameters" class="anchor" href="#resource-path-onlyparameters" aria-hidden="true"><span class="octicon octicon-link"></span></a>Resource Path Only<h2>
+<a id="parameters" class="anchor" href="#parameters" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+
+<h3>
+<a id="parameters-1" class="anchor" href="#parameters-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters</h3>
+
+</h2>
+</h2><p>Parameters can be used in place of any property of value in any query object. Prefix the variable name with '@' when using the variable. Use the ODataQueryParameterCollection object and set your parameters as if you were setting public variables on the object.</p>
+
+<div class="highlight highlight-PHP"><pre><span class="pl-s2"><span class="pl-vo">$params</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-s3">ODataQueryParameterCollection</span>();</span>
+<span class="pl-s2"><span class="pl-vo">$params</span><span class="pl-k">-&gt;</span><span class="pl-vo">myParam1</span> <span class="pl-k">=</span> <span class="pl-c1">10</span>;</span>
+<span class="pl-s2"><span class="pl-vo">$params</span><span class="pl-k">-&gt;</span><span class="pl-vo">otherParam</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Other<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-vo">$filter</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-s3">ODataLessThanEquals</span>(<span class="pl-s1"><span class="pl-pds">'</span>@otherPraram<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>@myParam1<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-vo">$path</span><span class="pl-k">-&gt;</span>filter(<span class="pl-vo">$filter</span>)<span class="pl-k">-&gt;</span>parameters(<span class="pl-vo">$params</span>);</span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-c">// OUTPUT PATH: http://www.example.com/test/api/Employees?$filter=@otherParam le @myParam1&amp;$order=ASC&amp;@myParam1=10&amp;@otherParam=Other</span></span></pre></div>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Odataquery-php maintained by <a href="https://github.com/curiosity26">curiosity26</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
