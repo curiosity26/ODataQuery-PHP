@@ -9,9 +9,7 @@
 namespace ODataQuery\Filter\Operators\Functional\Mathematical;
 
 
-use ODataQuery\Filter\Operators\Functional\ODataComparableFunctionOperator;
-
-class ODataFloorOperator extends ODataComparableFunctionOperator {
+class ODataFloorOperator extends ODataMathematicalOperator {
     public function __construct($property = NULL) {
         parent::__construct('floor', $property);
     }
