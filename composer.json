@@ -4,7 +4,7 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "license": "GPL-2.0",
-  "version": "1.0.2",
+  "version": "1.0.1",
   "time": "2014-12-21",
   "homepage": "http://curiosity26.github.io/ODataQuery-PHP/",
   "authors": [
