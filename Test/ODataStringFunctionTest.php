@@ -56,6 +56,11 @@ class ODataStringFunctionTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals('substring(TestValue, 3, 5)', (string)$output);
   }
 
+  public function testReplace() {
+    $output = new \ODataQuery\Filter\Operators\Functional\String\ODataReplaceOperator('TestValue', "' and '", "' or '");
+    $this->assertEquals('replace(TestValue, \' and \', \' or \')', (string)$output);
+  }
+
   public function testToLower() {
     $output = new \ODataQuery\Filter\Operators\Functional\String\ODataToLowerOperator('TestValue');
     $this->assertEquals('tolower(TestValue)', (string)$output);
