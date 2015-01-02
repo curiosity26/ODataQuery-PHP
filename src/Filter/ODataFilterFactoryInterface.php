@@ -58,6 +58,23 @@ interface ODataFilterFactoryInterface {
     public function toUpper();
     public function toLower();
 
+    /* Date */
+    public function now();
+    public function datetime();
+    public function minDateTime();
+    public function maxDateTime();
+    public function date();
+    public function year();
+    public function day();
+    public function month();
+    public function time();
+    public function hour();
+    public function minute();
+    public function second();
+    public function fractionalSeconds();
+    public function totalOffsetMinutes();
+    public function totalSeconds();
+
     /* Geographical */
     public function distance($toPoint);
     public function intersects($point);

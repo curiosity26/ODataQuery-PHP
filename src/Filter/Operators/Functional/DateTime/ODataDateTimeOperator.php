@@ -13,6 +13,11 @@ use ODataQuery\Filter\Operators\Functional\ODataComparableFunctionOperator;
 
 class ODataDateTimeOperator extends ODataComparableFunctionOperator {
   protected $format = 'Y-m-d H:i:s e';
+
+  public function __construct($property = NULL) {
+    parent::__construct('datetime', $property);
+  }
+
   public function equals($value, $isField = FALSE) {
     if ($value instanceof \DateTimeInterface) {
       $value = $value->format($this->format);

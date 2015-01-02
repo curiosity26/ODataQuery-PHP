@@ -10,8 +10,8 @@ namespace ODataQuery\Filter\Operators\Functional\DateTime;
 
 
 class ODataDateOperator extends ODataDateTimeOperator {
+    protected $format = 'Y-m-d';
     public function __construct($property = NULL) {
         parent::__construct('date', $property);
-        $this->format = 'Y-m-d';
     }
 }

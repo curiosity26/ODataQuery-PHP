@@ -9,6 +9,21 @@
 namespace ODataQuery\Filter;
 
 
+use ODataQuery\Filter\Operators\Functional\DateTime\ODataDateOperator;
+use ODataQuery\Filter\Operators\Functional\DateTime\ODataDateTimeOperator;
+use ODataQuery\Filter\Operators\Functional\DateTime\ODataDayOperator;
+use ODataQuery\Filter\Operators\Functional\DateTime\ODataFractionalSecondsOperator;
+use ODataQuery\Filter\Operators\Functional\DateTime\ODataHourOperator;
+use ODataQuery\Filter\Operators\Functional\DateTime\ODataMaxDateTimeOperator;
+use ODataQuery\Filter\Operators\Functional\DateTime\ODataMinDateTimeOperator;
+use ODataQuery\Filter\Operators\Functional\DateTime\ODataMinuteOperator;
+use ODataQuery\Filter\Operators\Functional\DateTime\ODataMonthOperator;
+use ODataQuery\Filter\Operators\Functional\DateTime\ODataNowOperator;
+use ODataQuery\Filter\Operators\Functional\DateTime\ODataSecondOperator;
+use ODataQuery\Filter\Operators\Functional\DateTime\ODataTimeOperator;
+use ODataQuery\Filter\Operators\Functional\DateTime\ODataTotalOffsetMinutesOperator;
+use ODataQuery\Filter\Operators\Functional\DateTime\ODataTotalSecondsOperator;
+use ODataQuery\Filter\Operators\Functional\DateTime\ODataYearOperator;
 use ODataQuery\Filter\Operators\Functional\Geo\ODataGeoDistanceOperator;
 use ODataQuery\Filter\Operators\Functional\Geo\ODataGeoIntersectsOperator;
 use ODataQuery\Filter\Operators\Functional\Geo\ODataGeoLengthOperator;
@@ -374,6 +389,82 @@ class ODataFilterFactory extends ODataQueryFilter implements ODataFilterFactoryI
         else {
             $this->property = new ODataToLowerOperator($this->property);
         }
+        return $this;
+    }
+
+    /* Date */
+    public function now() {
+        $this->property = new ODataNowOperator();
+        return $this;
+    }
+
+    public function datetime() {
+        $this->property = new ODataDateTimeOperator($this->property);
+        return $this;
+    }
+
+    public function minDateTime() {
+        $this->property = new ODataMinDateTimeOperator();
+        return $this;
+    }
+
+    public function maxDateTime() {
+        $this->property = new ODataMaxDateTimeOperator();
+        return $this;
+    }
+
+    public function date() {
+        $this->property = new ODataDateOperator($this->property);
+        return $this;
+    }
+
+    public function year() {
+        $this->property = new ODataYearOperator($this->property);
+        return $this;
+    }
+
+    public function day() {
+        $this->property = new ODataDayOperator($this->property);
+        return $this;
+    }
+
+    public function month() {
+        $this->property = new ODataMonthOperator($this->property);
+        return $this;
+    }
+
+    public function time() {
+        $this->property = new ODataTimeOperator($this->property);
+        return $this;
+    }
+
+    public function hour() {
+        $this->property = new ODataHourOperator($this->property);
+        return $this;
+    }
+
+    public function minute() {
+        $this->property = new ODataMinuteOperator($this->property);
+        return $this;
+    }
+
+    public function second() {
+        $this->property = new ODataSecondOperator($this->property);
+        return $this;
+    }
+
+    public function fractionalSeconds() {
+        $this->property = new ODataFractionalSecondsOperator($this->property);
+        return $this;
+    }
+
+    public function totalOffsetMinutes() {
+        $this->property = new ODataTotalOffsetMinutesOperator($this->property);
+        return $this;
+    }
+
+    public function totalSeconds() {
+        $this->property = new ODataTotalSecondsOperator($this->property);
         return $this;
     }
 
