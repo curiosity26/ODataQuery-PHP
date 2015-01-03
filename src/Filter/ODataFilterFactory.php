@@ -276,6 +276,7 @@ class ODataFilterFactory extends ODataQueryFilter implements ODataFilterFactoryI
         $this->property = new ODataAnyOperator($this->property, $value);
         return $this;
     }
+
     public function all($value) {
         $this->property = new ODataAllOperator($this->property, $value);
         return $this;

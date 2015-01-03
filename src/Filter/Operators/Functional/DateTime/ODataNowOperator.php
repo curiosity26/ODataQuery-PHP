@@ -9,7 +9,7 @@
 namespace ODataQuery\Filter\Operators\Functional\DateTime;
 
 
-class ODataNowOperator extends ODataDateTimeOperator {
+class ODataNowOperator extends ODataDateTimeFilter {
     public function __construct() {
         parent::__construct('now');
     }

@@ -9,9 +9,9 @@
 namespace ODataQuery\Filter\Operators\Functional\DateTime;
 
 
-class ODataTimeOperator extends ODataDateTimeOperator {
+class ODataTimeOperator extends ODataDateTimeFilter {
+    protected $format = 'H:i:s e';
     public function __construct($property = NULL) {
         parent::__construct('time', $property);
-        $this->format = 'H:i:s e';
     }
 }

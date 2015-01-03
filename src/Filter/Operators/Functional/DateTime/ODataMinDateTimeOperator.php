@@ -9,7 +9,7 @@
 namespace ODataQuery\Filter\Operators\Functional\DateTime;
 
 
-class ODataMinDateTimeOperator extends ODataDateTimeOperator {
+class ODataMinDateTimeOperator extends ODataDateTimeFilter {
     public function __construct() {
         parent::__construct('mindatetime');
     }

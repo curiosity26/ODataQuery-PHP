@@ -9,9 +9,7 @@
 namespace ODataQuery\Filter\Operators\Functional\DateTime;
 
 
-use ODataQuery\Filter\Operators\Functional\ODataComparableFunctionOperator;
-
-class ODataTotalOffsetMinutesOperator extends ODataComparableFunctionOperator {
+class ODataTotalOffsetMinutesOperator extends ODataDateTimeFilter {
     public function __construct($property = NULL) {
         parent::__construct('totaloffsetminutes', $property);
     }

@@ -9,9 +9,8 @@
 namespace ODataQuery\Filter\Operators\Functional\DateTime;
 
 
-use ODataQuery\Filter\Operators\Functional\ODataComparableFunctionOperator;
 
-class ODataYearOperator extends ODataComparableFunctionOperator {
+class ODataYearOperator extends ODataDateTimeFilter {
     public function __construct($property = NULL)
     {
         parent::__construct('year', $property);
