@@ -4,8 +4,8 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "license": "GPL-2.0",
-  "version": "1.0.0",
-  "time": "2014-12-21",
+  "version": "1.0.2",
+  "time": "2015-04-23",
   "authors": [
     {
       "name": "Alex Boyce",
@@ -14,10 +14,6 @@
       "role": "Developer"
     }
   ],
-  "dist": {
-    "url": "https://github.com/curiosity26/ODataQuery-PHP.git",
-    "type": "git"
-  },
   "support": {
     "issues": "https://github.com/curiosity26/ODataQuery-PHP/issues",
     "wiki": "https://github.com/curiosity26/ODataQuery-PHP/wiki",
