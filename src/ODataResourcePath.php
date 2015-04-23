@@ -68,6 +68,10 @@ class ODataResourcePath extends ODataResource {
     }
 
     public function __toString() {
-        return $this->path().'?'.parent::__toString();
+        $args = parent::__toString();
+        if (strlen($args) > 0) {
+            $args = "?$args";
+        }
+        return $this->path().$args;
     }
 }

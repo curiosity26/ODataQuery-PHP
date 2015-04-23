@@ -9,9 +9,7 @@
 namespace ODataQuery\Filter\Operators\Functional\DateTime;
 
 
-use ODataQuery\Filter\Operators\Functional\ODataComparableFunctionOperator;
-
-class ODataDayOperator extends ODataComparableFunctionOperator{
+class ODataDayOperator extends ODataDateTimeFilter{
     public function __construct($property = NULL) {
         parent::__construct('day', $property);
     }

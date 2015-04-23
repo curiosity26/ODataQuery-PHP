@@ -6,7 +6,7 @@
  * Time: 9:18 PM
  */
 
-namespace ODataQuery\Filter\Operators\Functional\Mathematical;
+namespace ODataQuery\Filter\Operators;
 
 
 class ODataCastOperator extends ODataIsOfOperator {

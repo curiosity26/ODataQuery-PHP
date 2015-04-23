@@ -46,7 +46,7 @@ class ODataQueryExpand extends ODataResource implements ODataExpandableInterface
 
     public function build() {
         $build = parent::build();
-        if ($this->count() !== TRUE) {
+        if ($this->count !== TRUE) {
             $build['$limits'] = $this->limits();
         }
         return array_filter($build);

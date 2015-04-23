@@ -9,7 +9,7 @@
 class ODataResourcePathTest extends PHPUnit_Framework_TestCase {
     public function testPath() {
         $output = new \ODataQuery\ODataResourcePath('api/Objects');
-        $this->assertEquals('api/Objects?', (string)$output);
+        $this->assertEquals('api/Objects', (string)$output);
     }
 
     public function testSelect() {
@@ -66,4 +66,16 @@ class ODataResourcePathTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('api/Objects?$expand=@prop($search=google&$expand=SubProperty($filter=SubSubProperty lt 4)&$top=20&$skip=100)&@prop=Property', (string)$output);
     }
 
+    public function testExpand2() {
+        $query = new \ODataQuery\ODataResourcePath('api/Objects');
+        $expand = new \ODataQuery\Expand\ODataQueryExpand('PrimaryContact');
+        $filter = new \ODataQuery\Filter\Operators\Logical\ODataEqualsOperator('FirstName', "'Bob'");
+
+        //$query = new \ODataQuery\ODataResource();
+        $expand->filter($filter->_and(new \ODataQuery\Filter\Operators\Logical\ODataEqualsOperator('LastName',
+            "'Jones'")));
+        $query->expand(new \ODataQuery\Expand\ODataQueryExpandCollection(array($expand)));
+        $this->assertEquals("api/Objects?\$expand=PrimaryContact(\$filter=(FirstName eq 'Bob') and (LastName eq 'Jones'))", (string)
+        $query);
+    }
 }

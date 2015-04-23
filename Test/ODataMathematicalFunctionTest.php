@@ -7,19 +7,6 @@
  */
 
 class ODataMathematicalFunctionTest extends PHPUnit_Framework_TestCase {
-  public function testCast() {
-    $output = new \ODataQuery\Filter\Operators\Functional\Mathematical\ODataCastOperator('Edm.String');
-    $this->assertEquals('cast(Edm.String)', (string)$output);
-    $output->property = new \ODataQuery\ODataCount('TestProperty');
-    $this->assertEquals('cast(TestProperty/$count, Edm.String)', (string)$output);
-  }
-
-  public function testIsOf() {
-    $output = new \ODataQuery\Filter\Operators\Functional\Mathematical\ODataIsOfOperator('Edm.Int');
-    $this->assertEquals('isof(Edm.Int)', (string)$output);
-    $output->property = new \ODataQuery\ODataCount('TestProperty');
-    $this->assertEquals('isof(TestProperty/$count, Edm.Int)', (string)$output);
-  }
 
   public function testCeiling() {
     $output = new \ODataQuery\Filter\Operators\Functional\Mathematical\ODataCeilingOperator('TestValue');

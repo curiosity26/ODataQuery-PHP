@@ -61,4 +61,18 @@ class ODataLogicalOperatorTest extends \PHPUnit_Framework_TestCase {
     $lt = new \ODataQuery\Filter\Operators\Logical\ODataLessThanOperator('TestValue', 10);
     $this->assertEquals('(TestValue gt 4) or (TestValue lt 10)', (string)$gt->_or($lt));
   }
+
+  public function testCast() {
+    $output = new \ODataQuery\Filter\Operators\ODataCastOperator('Edm.String');
+    $this->assertEquals('cast(Edm.String)', (string)$output);
+    $output->property = new \ODataQuery\ODataCount('TestProperty');
+    $this->assertEquals('cast(TestProperty/$count, Edm.String)', (string)$output);
+  }
+
+  public function testIsOf() {
+    $output = new \ODataQuery\Filter\Operators\ODataIsOfOperator('Edm.Int');
+    $this->assertEquals('isof(Edm.Int)', (string)$output);
+    $output->property = new \ODataQuery\ODataCount('TestProperty');
+    $this->assertEquals('isof(TestProperty/$count, Edm.Int)', (string)$output);
+  }
 }

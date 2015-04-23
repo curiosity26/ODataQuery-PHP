@@ -9,55 +9,11 @@
 namespace ODataQuery\Filter\Operators\Functional\DateTime;
 
 
-use ODataQuery\Filter\Operators\Functional\ODataComparableFunctionOperator;
 
-class ODataDateTimeOperator extends ODataComparableFunctionOperator {
+class ODataDateTimeOperator extends ODataDateTimeFilter {
   protected $format = 'Y-m-d H:i:s e';
-  public function equals($value, $isField = FALSE) {
-    if ($value instanceof \DateTimeInterface) {
-      $value = $value->format($this->format);
-      $isField = TRUE;
-    }
-    return parent::equals($value, $isField);
-  }
 
-  public function notEquals($value, $isField = FALSE) {
-    if ($value instanceof \DateTimeInterface) {
-      $value = $value->format($this->format);
-      $isField = TRUE;
-    }
-    return parent::notEquals($value, $isField);
-  }
-
-  public function lessThan($value, $isField = FALSE) {
-    if ($value instanceof \DateTimeInterface) {
-      $value = $value->format($this->format);
-      $isField = TRUE;
-    }
-    return parent::lessThan($value, $isField);
-  }
-
-  public function lessThanEquals($value, $isField = FALSE) {
-    if ($value instanceof \DateTimeInterface) {
-      $value = $value->format($this->format);
-      $isField = TRUE;
-    }
-    return parent::lessThanEquals($value, $isField);
-  }
-
-  public function greaterThan($value, $isField = FALSE) {
-    if ($value instanceof \DateTimeInterface) {
-      $value = $value->format($this->format);
-      $isField = TRUE;
-    }
-    return parent::greaterThan($value, $isField);
-  }
-
-  public function greaterThanEquals($value, $isField = FALSE) {
-    if ($value instanceof \DateTimeInterface) {
-      $value = $value->format($this->format);
-      $isField = TRUE;
-    }
-    return parent::greaterThanEquals($value, $isField);
+  public function __construct($property = NULL) {
+    parent::__construct('datetime', $property);
   }
 }

@@ -6,7 +6,7 @@
  * Time: 9:10 PM
  */
 
-namespace ODataQuery\Filter\Operators\Functional\Mathematical;
+namespace ODataQuery\Filter\Operators;
 
 
 use ODataQuery\Filter\Operators\Functional\ODataFunctionalOperator;

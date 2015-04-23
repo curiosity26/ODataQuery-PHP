@@ -9,9 +9,7 @@
 namespace ODataQuery\Filter\Operators\Functional\Mathematical;
 
 
-use ODataQuery\Filter\Operators\Functional\ODataComparableFunctionOperator;
-
-class ODataRoundOperator extends ODataComparableFunctionOperator{
+class ODataRoundOperator extends ODataMathematicalOperator{
     public function __construct($property = NULL) {
         parent::__construct('round', $property);
     }

@@ -44,6 +44,10 @@ class ODataStringOperator extends ODataFunctionalOperator implements ODataString
     return new ODataSubstringOperator($this, $start, $end);
   }
 
+  public function replace($find, $replace) {
+    return new ODataReplaceOperator($this, $find, $replace);
+  }
+
   public function toUpper() {
     return new ODataToUpperOperator($this);
   }

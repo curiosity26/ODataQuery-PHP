@@ -18,6 +18,7 @@ interface ODataStringOperatorInterface {
   public function length();
   public function trim();
   public function substring($start, $end = NULL);
+  public function replace($find, $replace);
   public function toUpper();
   public function toLower();
 }

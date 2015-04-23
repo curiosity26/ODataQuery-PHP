@@ -1,14 +1,19 @@
 ODataQuery-PHP
 ==============
 
-A library of PHP Classes that allow for OData queries to be easily built and extended for appending to a URL Request to a server-side API supporting OData.
+A library of PHP Classes that allow for OData queries to be easily built and extended for appending to a URL Request to a server-side API supporting OData v4.0. Support for any of the query functions made available in this library are based on the configuration of the API server. This library simply conforms to the expected functionality as described on http://www.odata.org/. Other language versions of this library are available at http://www.odata.org/libraries or on GitHub at https://github.com/ODataOrg/.
 
 <h2>Installation</h2>
 
 <h3>Included in a PHP Project w/ Composer</h3>
 
-Add the following to your composer.json file:
-
+Add the following to your composer.json file using the latest version number or 1.0.* to keep it fresh:
+```JSON
+"require": {
+    "curiosity26/odataquery": "1.0.*"
+}
+```
+or to use the bleeding edge developement version:
 ```JSON
 "require": {
     "curiosity26/odataquery": "dev-master"
@@ -43,7 +48,7 @@ $path = new ODataResourcePath($apiUrl.$property);
 The created path can be used just like a string variable:
 ```PHP
 print $path;
-// http://www.example.com/test/api/Employees?
+// http://www.example.com/test/api/Employees
 ```
 If you to force the path to be used as a string (sometimes helpful when passing as a variable into a function that requires a string parameter) you can simply cast the ODataResourcePath object as a string. The goes for any object in the ODataQuery library.
 ```PHP
@@ -144,7 +149,7 @@ $collection->add($expand3);
 
 $path->expand($collection);
 
-// OUTPUT PATH: http://www.example.com/test/api/Employees?$expand=FirstName($filter=$it eq 'Alex'),LastName($search=Boyce),Address($expand=City($search="New York"))&$order=ASC
+// OUTPUT PATH: http://www.example.com/test/api/Employees?$expand=FirstName($filter=$it eq 'Alex'),LastName($search=Boyce),Address($expand=City($search="New York"))
 ```
 
 <h2>Resource Path Only<h2>
@@ -161,5 +166,5 @@ $filter = new ODataLessThanEquals('@otherPraram', '@myParam1');
 
 $path->filter($filter)->parameters($params);
 
-// OUTPUT PATH: http://www.example.com/test/api/Employees?$filter=@otherParam le @myParam1&$order=ASC&@myParam1=10&@otherParam=Other
+// OUTPUT PATH: http://www.example.com/test/api/Employees?$filter=@otherParam le @myParam1&@myParam1=10&@otherParam=Other
 ```
