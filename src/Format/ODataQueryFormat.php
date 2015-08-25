@@ -6,7 +6,7 @@
  * Time: 14:18
  */
 
-namespace ODataQuery\Pager;
+namespace ODataQuery\Format;
 
 use ODataQuery\ODataQueryOptionInterface;
 
@@ -32,6 +32,6 @@ class ODataQueryFormat implements ODataQueryOptionInterface
 
     public function __toString()
     {
-        return '$format=' . $this->type;
+        return $this->type;
     }
 }
