@@ -31,7 +31,7 @@ class ODataLogicalOperator extends ODataQueryFilter implements ODataConditionalI
     protected function singleWord($value)
     {
         $value = trim($value, ' ');
-        return (substr_count($value, ' ') > 0);
+        return (substr_count($value, ' ') === 0);
     }
 
     public function __toString() {
