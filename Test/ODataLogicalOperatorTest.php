@@ -20,20 +20,6 @@ class ODataLogicalOperatorTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals('TestValue eq 4', (string)$output);
   }
 
-  public function testEqualsSentence() {
-    $output = new \ODataQuery\Filter\Operators\Logical\ODataEqualsOperator('TestValue', "foo bar baz");
-    $this->assertEquals("TestValue eq 'foo bar baz'", (string)$output);
-
-    $output = new \ODataQuery\Filter\Operators\Logical\ODataEqualsOperator('TestValue', " foo bar baz ");
-    $this->assertEquals("TestValue eq 'foo bar baz'", (string)$output);
-
-    $output = new \ODataQuery\Filter\Operators\Logical\ODataEqualsOperator('TestValue', " foo bar baz");
-    $this->assertEquals("TestValue eq 'foo bar baz'", (string)$output);
-
-    $output = new \ODataQuery\Filter\Operators\Logical\ODataEqualsOperator('TestValue', "foo bar baz ");
-    $this->assertEquals("TestValue eq 'foo bar baz'", (string)$output);
-  }
-
   public function testNotEquals() {
     $output = new \ODataQuery\Filter\Operators\Logical\ODataNotEqualsOperator('TestValue', 4);
     $this->assertEquals('TestValue ne 4', (string)$output);

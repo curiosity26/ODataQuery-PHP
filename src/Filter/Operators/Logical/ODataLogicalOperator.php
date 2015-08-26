@@ -28,22 +28,12 @@ class ODataLogicalOperator extends ODataQueryFilter implements ODataConditionalI
         return new ODataOrOperator($this, $value);
     }
 
-    protected function singleWord($value)
-    {
-        $value = trim($value, ' ');
-        return (substr_count($value, ' ') === 0);
-    }
-
     public function __toString() {
         $property = $this->property;
         $op = $this->operator;
         $value = $this->value;
         if ($value instanceof ODataMathematicalOperatorInterface) {
             $value = "($value)";
-        }
-
-        if (!$this->singleWord($value)) {
-            $value = "'$value'";
         }
 
         return "$property $op $value";
