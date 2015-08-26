@@ -35,6 +35,7 @@ class ODataLogicalOperator extends ODataQueryFilter implements ODataConditionalI
         if ($value instanceof ODataMathematicalOperatorInterface) {
             $value = "($value)";
         }
+
         return "$property $op $value";
     }
 }
