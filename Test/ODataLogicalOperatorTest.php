@@ -24,13 +24,13 @@ class ODataLogicalOperatorTest extends \PHPUnit_Framework_TestCase {
     $output = new \ODataQuery\Filter\Operators\Logical\ODataEqualsOperator('TestValue', "foo bar baz");
     $this->assertEquals("TestValue eq 'foo bar baz'", (string)$output);
 
-    $output = new \ODataQuery\Filter\Operators\Logical\ODataEqualsOperator('TestValue', " foo bar baz");
-    $this->assertEquals("TestValue eq 'foo bar baz'", (string)$output);
-
     $output = new \ODataQuery\Filter\Operators\Logical\ODataEqualsOperator('TestValue', " foo bar baz ");
     $this->assertEquals("TestValue eq 'foo bar baz'", (string)$output);
 
-    $output = new \ODataQuery\Filter\Operators\Logical\ODataEqualsOperator('TestValue', "foo bar baz");
+    $output = new \ODataQuery\Filter\Operators\Logical\ODataEqualsOperator('TestValue', " foo bar baz");
+    $this->assertEquals("TestValue eq 'foo bar baz'", (string)$output);
+
+    $output = new \ODataQuery\Filter\Operators\Logical\ODataEqualsOperator('TestValue', "foo bar baz ");
     $this->assertEquals("TestValue eq 'foo bar baz'", (string)$output);
   }
 
