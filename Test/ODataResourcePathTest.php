@@ -42,6 +42,12 @@ class ODataResourcePathTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('api/Objects?$orderby=Property', (string)$output);
     }
 
+    public function testFormat() {
+        $output = new \ODataQuery\ODataResourcePath('api/Objects');
+        $output->format('json');
+        $this->assertEquals('api/Objects?$format=json', (string)$output);
+    }
+
     public function testParameters() {
         $output = new \ODataQuery\ODataResourcePath('api/Objects');
         $params = new \ODataQuery\Parameter\ODataQueryParameterCollection();

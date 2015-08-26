@@ -27,7 +27,7 @@ class ODataResourcePath extends ODataResource {
 
     public function __construct($path = NULL, ODataQueryFilterInterface $filter = NULL, ODataQuerySelect $select = NULL,
         ODataExpandableInterface $expand = NULL, ODataQueryPager $pager = NULL,
-        ODataQuerySearch $search = NULL, $orderBy = NULL, ODataQueryParameterCollection $params = NULL, $order = NULL) {
+        ODataQuerySearch $search = NULL, $orderBy = NULL, ODataQueryParameterCollection $params = NULL, $order = NULL, $format = null) {
 
         // If all parameters were set then the functions could be chained.
         // But if one is NULL then it will break the chain
@@ -35,7 +35,7 @@ class ODataResourcePath extends ODataResource {
         $this->parameters($params);
         $this->order = $order;
 
-        parent::__construct($filter, $select, $expand, $pager, $search, $orderBy);
+        parent::__construct($filter, $select, $expand, $pager, $search, $orderBy, $format);
     }
 
     public function path($path = NULL) {

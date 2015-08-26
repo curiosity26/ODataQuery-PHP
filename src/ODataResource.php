@@ -22,12 +22,13 @@ class ODataResource implements ODataQueryOptionInterface, ODataResourceInterface
     protected $search;
     protected $select;
     protected $expand;
+    protected $format;
     protected $count = FALSE;
     protected $orderBy;
 
     public function __construct(ODataQueryFilterInterface $filter = NULL, ODataQuerySelect $select = NULL,
         ODataResource $expand = NULL, ODataQueryPager $pager = NULL,
-        ODataQuerySearch $search = NULL, $orderBy = NULL) {
+        ODataQuerySearch $search = NULL, $orderBy = NULL, $format = NULL) {
 
         $this->select($select);
         $this->pager($pager);
@@ -35,6 +36,7 @@ class ODataResource implements ODataQueryOptionInterface, ODataResourceInterface
         $this->search($search);
         $this->expand($expand);
         $this->orderBy($orderBy);
+        $this->format($format);
     }
 
     public function pager(ODataQueryPager $pager = NULL) {
@@ -85,6 +87,14 @@ class ODataResource implements ODataQueryOptionInterface, ODataResourceInterface
         return $this->orderBy;
     }
 
+    public function format($format = NULL) {
+        if (isset($format)) {
+            $this->format = $format;
+            return $this;
+        }
+        return $this->format;
+    }
+
     public function count($enable = TRUE) {
         $this->count = $enable === TRUE;
         return $this;
@@ -97,6 +107,7 @@ class ODataResource implements ODataQueryOptionInterface, ODataResourceInterface
                 '$search' => $this->search(),
                 '$expand' => $this->expand(),
                 '$orderby' => $this->orderBy,
+                '$format' => $this->format(),
             );
 
         $pager = $this->pager();
