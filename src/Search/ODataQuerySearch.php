@@ -16,15 +16,22 @@ class ODataQuerySearch implements ODataQueryOptionInterface, ODataQuerySearchInt
     protected $conditionals = array();
 
     public function __construct($query = NULL) {
-        $this->query($query);
+        $this->setQuery($query);
     }
 
+    /**
+     * Use getter or setter
+     * Retained for backward compatibility
+     * @param null $query
+     * @return $this
+     * @deprecated
+     */
     public function query($query = NULL) {
         if (isset($query)) {
-            $this->query = self::cleanQuery($query);
+            $this->setQuery(self::cleanQuery($query));
             return $this;
         }
-        return $this->query;
+        return $this->getQuery();
     }
 
     static protected function cleanQuery($query) {
@@ -56,7 +63,7 @@ class ODataQuerySearch implements ODataQueryOptionInterface, ODataQuerySearchInt
     }
 
     public function __toString() {
-        $query = $this->query();
+        $query = $this->getQuery();
         if ($query instanceof ODataQuerySearchInterface) {
             $query = "($query)";
         }
@@ -66,5 +73,37 @@ class ODataQuerySearch implements ODataQueryOptionInterface, ODataQuerySearchInt
             $query .= " $op $condition";
         }
         return $query;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getQuery()
+    {
+        return $this->query;
+    }
+
+    /**
+     * @param mixed $query
+     */
+    public function setQuery($query)
+    {
+        $this->query = $query;
+    }
+
+    /**
+     * @return array
+     */
+    public function getConditionals()
+    {
+        return $this->conditionals;
+    }
+
+    /**
+     * @param array $conditionals
+     */
+    public function setConditionals($conditionals)
+    {
+        $this->conditionals = $conditionals;
     }
 }

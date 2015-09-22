@@ -26,13 +26,13 @@ class ODataQueryExpandCollection implements ODataExpandableCollectionInterface, 
     }
 
     public function add(ODataQueryExpand $item) {
-        $name = (string)$item->property();
+        $name = (string)$item->getProperty();
         $this->collection[$name] = $item;
         return $this;
     }
 
     public function remove(ODataQueryExpand $item) {
-        $name = (string)$item->property();
+        $name = (string)$item->getProperty();
         unset($this->collection[$name]);
         return $this;
     }

@@ -10,7 +10,7 @@ class ODataQuerySearchTest extends PHPUnit_Framework_TestCase {
     public function testSearch() {
         $output = new \ODataQuery\Search\ODataQuerySearch('mountain');
         $this->assertEquals('mountain', (string)$output);
-        $output->query('mountain bike');
+        $output->setQuery('mountain bike');
         $this->assertEquals('"mountain bike"', (string)$output);
     }
 

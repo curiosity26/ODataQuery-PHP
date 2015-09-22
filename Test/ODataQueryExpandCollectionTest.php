@@ -21,13 +21,13 @@ class ODataQueryExpandCollectionTest extends PHPUnit_Framework_TestCase {
         $item1 = new \ODataQuery\Expand\ODataQueryExpand('TestValue');
         $item2 = new \ODataQuery\Expand\ODataQueryExpand('Property');
 
-        $item1->limits(4)
-            ->filter(new \ODataQuery\Filter\Operators\Logical\ODataEqualsOperator('SubValue', 6))
-            ->select(new \ODataQuery\Select\ODataQuerySelect(array('SubValue', 'OtherValue')))
-            ->search(new \ODataQuery\Search\ODataQuerySearch("mountain bike"));
+        $item1->setLimits(4)
+            ->setFilter(new \ODataQuery\Filter\Operators\Logical\ODataEqualsOperator('SubValue', 6))
+            ->setSelect(new \ODataQuery\Select\ODataQuerySelect(array('SubValue', 'OtherValue')))
+            ->setSearch(new \ODataQuery\Search\ODataQuerySearch("mountain bike"));
 
-        $item2->expand(new \ODataQuery\Expand\ODataQueryExpandCollection(array($item1)))
-            ->search(new \ODataQuery\Search\ODataQuerySearch("google"));
+        $item2->setExpand(new \ODataQuery\Expand\ODataQueryExpandCollection(array($item1)))
+            ->setSearch(new \ODataQuery\Search\ODataQuerySearch("google"));
 
         $collection->add($item2);
         $this->assertEquals('Property($search=google&$expand=TestValue($select=SubValue,OtherValue&$filter=SubValue eq 6&$search="mountain bike"&$limits=4))', (string)$collection);
