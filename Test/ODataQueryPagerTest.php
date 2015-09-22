@@ -10,8 +10,8 @@ class ODataQueryPagerTest extends PHPUnit_Framework_TestCase {
     public function testPager() {
         $output = new \ODataQuery\Pager\ODataQueryPager();
         $this->assertEquals('$top=500&$skip=0', (string)$output);
-        $output->limit(20);
-        $output->page(6);
+        $output->setLimit(20);
+        $output->setPage(6);
         $this->assertEquals('$top=20&$skip=120', (string)$output);
     }
 }

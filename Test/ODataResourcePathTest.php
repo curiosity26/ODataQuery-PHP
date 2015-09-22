@@ -14,31 +14,31 @@ class ODataResourcePathTest extends PHPUnit_Framework_TestCase {
 
     public function testSelect() {
         $output = new \ODataQuery\ODataResourcePath('api/Objects');
-        $output->select(new \ODataQuery\Select\ODataQuerySelect(array("Prop1", "Prop2")));
+        $output->setSelect(new \ODataQuery\Select\ODataQuerySelect(array("Prop1", "Prop2")));
         $this->assertEquals('api/Objects?$select=Prop1,Prop2', (string)$output);
     }
 
     public function testSearch() {
         $output = new \ODataQuery\ODataResourcePath('api/Objects');
-        $output->search(new \ODataQuery\Search\ODataQuerySearch("mountain bike"));
+        $output->setSelect(new \ODataQuery\Search\ODataQuerySearch("mountain bike"));
         $this->assertEquals('api/Objects?$search="mountain bike"', (string)$output);
     }
 
     public function testFilter() {
         $output = new \ODataQuery\ODataResourcePath('api/Objects');
-        $output->filter(new \ODataQuery\Filter\Operators\Logical\ODataEqualsOperator("TestValue", 4));
+        $output->setFilter(new \ODataQuery\Filter\Operators\Logical\ODataEqualsOperator("TestValue", 4));
         $this->assertEquals('api/Objects?$filter=TestValue eq 4', (string)$output);
     }
 
     public function testPager() {
         $output = new \ODataQuery\ODataResourcePath('api/Objects');
-        $output->pager(new \ODataQuery\Pager\ODataQueryPager(50, 4));
+        $output->setPager(new \ODataQuery\Pager\ODataQueryPager(50, 4));
         $this->assertEquals('api/Objects?$top=50&$skip=200', (string)$output);
     }
 
     public function testOrderBy() {
         $output = new \ODataQuery\ODataResourcePath('api/Objects');
-        $output->orderBy('Property');
+        $output->setOrderBy('Property');
         $this->assertEquals('api/Objects?$orderby=Property', (string)$output);
     }
 
@@ -46,7 +46,7 @@ class ODataResourcePathTest extends PHPUnit_Framework_TestCase {
         $output = new \ODataQuery\ODataResourcePath('api/Objects');
         $params = new \ODataQuery\Parameter\ODataQueryParameterCollection();
         $params->prop = 'Property';
-        $output->parameters($params);
+        $output->setParameters($params);
         $this->assertEquals('api/Objects?@prop=Property', (string)$output);
         $params->test = 'TestProperty';
         $this->assertEquals('api/Objects?@prop=Property&@test=TestProperty', (string)$output);
@@ -57,12 +57,12 @@ class ODataResourcePathTest extends PHPUnit_Framework_TestCase {
         $params->prop = 'Property';
         $output = new \ODataQuery\ODataResourcePath('api/Objects');
         $expand = new \ODataQuery\Expand\ODataQueryExpand('@prop');
-        $expand->search(new \ODataQuery\Search\ODataQuerySearch("google"))
-            ->pager(new \ODataQuery\Pager\ODataQueryPager(20, 5));
+        $expand->setSearch(new \ODataQuery\Search\ODataQuerySearch("google"))
+            ->setPager(new \ODataQuery\Pager\ODataQueryPager(20, 5));
         $expand2 = new \ODataQuery\Expand\ODataQueryExpand("SubProperty", new \ODataQuery\Filter\Operators\Logical\ODataLessThanOperator("SubSubProperty", 4));
-        $expand->expand(new \ODataQuery\Expand\ODataQueryExpandCollection(array($expand2)));
-        $output->expand(new \ODataQuery\Expand\ODataQueryExpandCollection(array($expand)));
-        $output->parameters($params);
+        $expand->setExpand(new \ODataQuery\Expand\ODataQueryExpandCollection(array($expand2)));
+        $output->setExpand(new \ODataQuery\Expand\ODataQueryExpandCollection(array($expand)));
+        $output->setParameters($params);
         $this->assertEquals('api/Objects?$expand=@prop($search=google&$expand=SubProperty($filter=SubSubProperty lt 4)&$top=20&$skip=100)&@prop=Property', (string)$output);
     }
 
@@ -72,9 +72,9 @@ class ODataResourcePathTest extends PHPUnit_Framework_TestCase {
         $filter = new \ODataQuery\Filter\Operators\Logical\ODataEqualsOperator('FirstName', "'Bob'");
 
         //$query = new \ODataQuery\ODataResource();
-        $expand->filter($filter->_and(new \ODataQuery\Filter\Operators\Logical\ODataEqualsOperator('LastName',
+        $expand->setFilter($filter->_and(new \ODataQuery\Filter\Operators\Logical\ODataEqualsOperator('LastName',
             "'Jones'")));
-        $query->expand(new \ODataQuery\Expand\ODataQueryExpandCollection(array($expand)));
+        $query->setExpand(new \ODataQuery\Expand\ODataQueryExpandCollection(array($expand)));
         $this->assertEquals("api/Objects?\$expand=PrimaryContact(\$filter=(FirstName eq 'Bob') and (LastName eq 'Jones'))", (string)
         $query);
     }

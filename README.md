@@ -58,7 +58,7 @@ myFakeFunction((string)$path);
 
 You can select which properties of the returned objects are included:
 ```PHP
-$path->select(new ODataQuerySelect(array("FirstName", "LastName")));
+$path->setSelect(new ODataQuerySelect(array("FirstName", "LastName")));
 ```
 See the Expand section below to learn how select can be applied to specific properties.
 
@@ -66,14 +66,14 @@ See the Expand section below to learn how select can be applied to specific prop
 
 You can search the properties of the object set using search:
 ```PHP
-$path->search(new ODataQuerySearch('mountain bike'));
+$path->setSearch(new ODataQuerySearch('mountain bike'));
 ```
 Search queries are also chainable:
 ```PHP
-$search = $path->search(); 
+$search = $path->getSearch(); 
 // operations functions are both setters and getters. When setting, the funciton returns the $path object for chainability
 $search->_and('balloon');
-$path->search($search);
+$path->setSearch($search);
 ```
 This will now search the set of Employees objects to be returned for '"mountain bike" AND balloon'. See the Expand section below to learn how the search function can be applied to specific properties.
 
@@ -81,35 +81,35 @@ This will now search the set of Employees objects to be returned for '"mountain 
 
 You can return the total record count of your query. The $count system query option ignores any $top, $skip, or $expand query options, and returns the total count of results across all pages including only those results matching any specified $filter and $search. Clients should be aware that the count returned inline may not exactly equal the actual number of items returned, due to latency between calculating the count and enumerating the last value or due to inexact calculations on the service.
 ```PHP
-$path->count();
-$path->count(FALSE); // Disables $count
+$path->getCount();
+$path->setCount(FALSE); // Disables $count
 ```
 <h3>$filter</h3>
 
 The recordset queried can be filtered to return a more precise set of records. There are various filters available and most can be used in combination with another. 
 ```PHP
 $filter = new ODataGreaterThanEqualsFilter('YearsEmployed', 6); // YearsEmployed ge 6
-$path->filter($filter);
+$path->setFilter($filter);
 ```
 Each filter has a set of extensible functions that allow the filter to be passed into another filter, returning the new filter.
 ```PHP
 $add_filter = new ODataAddFilter('YearsEmployed', 5); // YearsEmployed add 5
 $filter = $add_filter->greaterThanEquals(6); // YearsEmployed add 5 ge 6
-$path->filter($filter);
+$path->setFilter($filter);
 ```
 Filters can accept Filters as properties or values and a value can also be a property name
 ```PHP
 $sub_filter = new ODataSubtractFilter('YearsEmployed', 'YearsSebatical'); // YearsEmployed sub YearsSebatical
 $sub_filter2 = new ODataAddFilter('Awards', 'Demotions'); // Awards sub Demotions
 $filter = $sub_filter->greaterThan($sub_filter2); // (YearsEmployed sub YearsSebatical) gt (Awards sub Demotions)
-$path->filter($filter);
+$path->setFilter($filter);
 ```
 <h3>$pager</h3>
 
 Records can be paged server-side by passing $top and $skip where $top is the limit of records returned and $skip is the start offset. The ODataQueryPager object takes the math out of the equation and lets you simply specify the limit and the page you want to return.
 ```PHP
 $pager = new ODataQueryPager(20, 5); // $top=20&$skip=100
-$path->pager($pager);
+$path->setPager($pager);
 ```
 
 <h3>$orderby</h3>
@@ -117,7 +117,7 @@ $path->pager($pager);
 Results can be sorted by a property name within the collection. Simply specify which property you would like to sort by in the orderBy() function.
 
 ```PHP
-$path->orderBy('LastName');
+$path->setOrderBy('LastName');
 ```
 
 <h3>$expand</h3>

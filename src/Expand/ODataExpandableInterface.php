@@ -10,7 +10,9 @@ namespace ODataQuery\Expand;
 
 
 interface ODataExpandableInterface {
-    public function property($property = NULL);
-    public function limits($limits = NULL);
+    public function setProperty($property = NULL);
+    public function setLimits($limits = NULL);
+    public function getProperty();
+    public function getLimits();
     public function __toString();
 }

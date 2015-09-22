@@ -22,38 +22,52 @@ class ODataQueryExpand extends ODataResource implements ODataExpandableInterface
     public function __construct($property = NULL, ODataQueryFilterInterface $filter = NULL,
         ODataQuerySelect $select = NULL, ODataResource $expand = NULL, ODataQueryPager $pager = NULL,
         ODataQuerySearch $search = NULL, $orderBy = NULL) {
-        $this->property($property);
+        $this->setProperty($property);
         parent::__construct($filter, $select, $expand, $pager, $search, $orderBy);
     }
 
+    /**
+     * Use getter or setter
+     * Retained for backward compatibility
+     * @param null $property
+     * @return $this
+     * @deprecated
+     */
     public function property($property = NULL) {
         if (isset($property)) {
-            $this->property = $property;
+            $this->setProperty($property);
             return $this;
         }
-        return $this->property;
+        return $this->getProperty();
     }
 
+    /**
+     * Use getter or setter
+     * Retained for backward compatibility
+     * @param null $limits
+     * @return $this
+     * @deprecated
+     */
     public function limits($limits = NULL) {
         if (isset($limits)) {
             if (is_int($limits)) {
-                $this->limits = $limits;
+                $this->setLimits($limits);
                 return $this;
             }
         }
-        return $this->limits;
+        return $this->getLimits();
     }
 
     public function build() {
         $build = parent::build();
         if ($this->count !== TRUE) {
-            $build['$limits'] = $this->limits();
+            $build['$limits'] = $this->getLimits();
         }
         return array_filter($build);
     }
 
     public function __toString() {
-        $output = (string)$this->property();
+        $output = (string)$this->getProperty();
         $build = $this->build();
         $args = array();
         if (!empty($build)) {
@@ -69,4 +83,38 @@ class ODataQueryExpand extends ODataResource implements ODataExpandableInterface
 
         return $output;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getLimits()
+    {
+        return $this->limits;
+    }
+
+    /**
+     * @param mixed $limits
+     */
+    public function setLimits($limits = NULL)
+    {
+        $this->limits = $limits;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProperty()
+    {
+        return $this->property;
+    }
+
+    /**
+     * @param mixed $property
+     */
+    public function setProperty($property = NULL)
+    {
+        $this->property = $property;
+    }
+
+
 }
